@@ -1,5 +1,5 @@
 // Require necessary NPM packages
-const express = require('express');
+const express = require("express");
 
 // Instantiate a Router (mini app that only handles routes)
 const router = express.Router();
@@ -10,16 +10,16 @@ const router = express.Router();
  * URI:         /
  * Description: Get the Root Route
  */
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   res.json({
-    message: 'Welcome to Blogy',
+    message: "Welcome to drdental",
   });
 });
 
-router.get('/test', (req, res) => {
-  console.log('index.js');
+router.get("/test", (req, res) => {
+  console.log("index.js");
   res.json({
-    message: 'test to index.js',
+    message: "test to index.js",
   });
 });
 

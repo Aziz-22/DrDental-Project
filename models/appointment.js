@@ -4,11 +4,9 @@ const mongoose = require("mongoose");
 // Define appointment Schema
 const AppointmentSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    content: String,
-    author: { type: String, required: true },
-    published: { type: Boolean, default: true },
-    publishedOn: { type: Date, default: Date.now },
+    date: { type: Date, required: true },
+    Pid: { type: Number },
+    Cid: { type: Number },
   },
   {
     timestamps: true,
