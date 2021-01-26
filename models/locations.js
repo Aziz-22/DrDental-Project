@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // Define Locations Schema
 const LocationsSchema = new mongoose.Schema(
   {
-    location: { type: String },
+    location: { type: String, required: true },
   },
   {
     timestamps: true,

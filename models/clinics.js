@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 // Define Clinics Schema
 const ClinicsSchema = new mongoose.Schema(
   {
-    ClincName: { type: String, required: true },
-    Lid: { type: Number },
+    clincName: { type: String, required: true },
+    locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locations" },
     rating: { type: String },
-    image: { type: String },
-    section: { type: [String] },
+    clinicImage: { type: String },
+    serviceType: { type: [String], required: true },
   },
   {
     timestamps: true,

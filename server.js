@@ -1,28 +1,29 @@
 // Require necessary NPM packages
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Require Route Files
-const indexRouter = require('./routes/index');
-const articlesRouter = require('./routes/articles');
+const indexRouter = require("./routes/index");
+// const articlesRouter = require("./routes/articles");
 
 // Require DB Configuration File
-const db_url = require('./db');
+const db_url = require("./db");
 
 // Establish Database Connection
 mongoose.connect(db_url, { useNewUrlParser: true });
-mongoose.connection.once('open', () => {
-  console.log('Connected to Mongo');
+mongoose.connection.once("open", () => {
+  console.log("Connected to Mongo");
 });
+
+// user Schema
 
 // Instantiate Express Application Object
 const app = express();
 
-
-app.get('/', (req, res) => {
-  console.log('get /');
-  res.json('result');
+app.get("/", (req, res) => {
+  console.log("get /");
+  res.json("result");
 });
 
 /*** Middleware ***/
@@ -43,7 +44,7 @@ app.use(
 
 // Mount imported Routers
 app.use(indexRouter);
-app.use(articlesRouter);
+// app.use(articlesRouter);
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);
 

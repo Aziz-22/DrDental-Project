@@ -23,5 +23,10 @@ router.get("/test", (req, res) => {
   });
 });
 
+router.get("/ali", (req, res) => {
+  console.log("index.js");
+  res.json(aliAppointment);
+});
+
 // Export the Router so we can use it in the server.js file
 module.exports = router;

@@ -2,11 +2,11 @@
 const mongoose = require("mongoose");
 // Define users Schema
 const UsersSchema = new mongoose.Schema({
-  Fname: { type: String, required: true },
-  Lname: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   phone: { type: Number },
   emial: { type: String, required: true },
-  image: { type: String },
+  userImage: { type: String },
   isAdmin: { type: Boolean, required: true },
   password: { type: String, required: true },
 });
