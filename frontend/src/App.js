@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 import Clinics from './components/Clinics';
+import Nav from "./components/Nav";
 
 
 export default class App extends Component {
