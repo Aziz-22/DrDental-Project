@@ -4,12 +4,11 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
 
-import { BrowserRouter as Router , Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 class Nav extends Component {
   render() {
     return (
-    
-        <Router>
+      <Router>
         <div className="Nav">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="Home">
@@ -46,7 +45,7 @@ class Nav extends Component {
             </div>
           </nav>
 
-          <div className = "Nav-Links">
+          <div className="Nav-Links">
             <ul class="nav justify-content-center">
               <li class="nav-items">
                 <a class="nav-link active" href="#">
@@ -64,19 +63,15 @@ class Nav extends Component {
                 </a>
               </li>
             </ul>
-                </div>
-                
-                <Switch>
+          </div>
 
-                    <Route path="/Home" component={Home}/>
-                    <Route path="/Login" component={Login}/>
-                    <Route path="/SignUp" component={Signup}/>
-               
-                </Switch>
-            </div>
-            
-            </Router>
-     
+          <Switch>
+            <Route path="/Home" component={Home} />
+            <Route path="/Login" component={Login} />
+            <Route path="/SignUp" component={Signup} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
