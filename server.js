@@ -6,6 +6,7 @@ const cors = require("cors");
 // Require Route Files
 const indexRouter = require("./routes/index");
 // const articlesRouter = require("./routes/articles");
+const adminRouter = require("./routes/Admin");
 
 // Require DB Configuration File
 const db_url = require("./db");
@@ -44,6 +45,7 @@ app.use(
 
 // Mount imported Routers
 app.use(indexRouter);
+app.use(adminRouter);
 // app.use(articlesRouter);
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);
