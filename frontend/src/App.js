@@ -4,6 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Clinics from "./components/Clinics";
 import Profile from "./components/Profile";
+import Admin from "./components/Admin";
 
 export default class App extends Component {
   render() {
@@ -11,11 +12,10 @@ export default class App extends Component {
       <Router>
         <div className="mainDiv">
           <Nav />
-          <Link to="/Clinics">Clinics</Link>
-          <Link to="/Profile">Profile</Link>
           <hr />
           <Route path="/Clinics" component={Clinics} />
           <Route path="/Profile" component={Profile} />
+          <Route exact path="/Admin" component={Admin}></Route>
         </div>
       </Router>
     );
