@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Clinics from "./components/Clinics";
 import Profile from "./components/Profile";
 import Admin from "./components/Admin";
+import Appointment from "./components/Appointment";
 
 export default class App extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends Component {
           <hr />
           <Route path="/Clinics" component={Clinics} />
           <Route path="/Profile" component={Profile} />
+          <Route path="/Appointment" component={Appointment} />
           <Route exact path="/Admin" component={Admin}></Route>
         </div>
       </Router>
