@@ -43,6 +43,12 @@ div.col-sm-4 {
   margin: 50px 50px 50px;
 }
 
+.reserveButton {
+  margin-left: 80px;
+  display: flex;
+  justify-content: space-around;
+}
+
 /* Abdulaziz & Shahad CSS */
 
 .Nav-Links {

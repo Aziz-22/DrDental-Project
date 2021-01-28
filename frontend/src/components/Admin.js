@@ -106,7 +106,6 @@ export default class Admin extends React.Component {
               <th scope="col">Services</th>
               <th scope="col">Rating</th>
               <th scope="col">Location</th>
-              <th scope="col">Image</th>
               <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
@@ -144,7 +143,6 @@ export default class Admin extends React.Component {
                 onChange={this.handleChange}
                 name="clinicImage"
                 value={this.state.input.clinicImage}
-                type="file"
               />
             </div>
             <div className="form-group">
