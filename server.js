@@ -8,6 +8,12 @@ const indexRouter = require("./routes/index");
 // const articlesRouter = require("./routes/articles");
 const adminRouter = require("./routes/Admin");
 
+// Sign Up Router 
+const signUpRouter = require("./routes/SignUp_Back");
+
+// Login Router
+const loginRouter = require("./routes/Login_Back");
+
 // Require DB Configuration File
 const db_url = require("./db");
 
@@ -46,7 +52,9 @@ app.use(
 // Mount imported Routers
 app.use(indexRouter);
 app.use(adminRouter);
-// app.use(articlesRouter);
+app.use(signUpRouter);
+app.use(loginRouter);
+
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);
 

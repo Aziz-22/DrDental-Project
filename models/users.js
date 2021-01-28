@@ -5,9 +5,9 @@ const UsersSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   phone: { type: Number },
-  emial: { type: String, required: true },
+  email: { type: String, required: true },
   userImage: { type: String },
-  isAdmin: { type: Boolean, required: true },
+  isAdmin: { type: Boolean, default: false},
   password: { type: String, required: true },
 });
 // Compile our Model based on the Schema
