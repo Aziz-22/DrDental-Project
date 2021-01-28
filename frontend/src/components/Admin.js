@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { getAllClinics, AddNewClinic, deleteClinicByID } from "../api";
+import Clinic from "./oneClinicAdmin";
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,18 @@ export default class Admin extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    getAllClinics()
+      .then((response) => {
+        console.log("RESPONSE: ", response);
+        console.log("DATA: ", response.data);
+        this.setState({ clinics: response.data });
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  }
+
   handleChange(event) {
     let input = this.state.input;
     input[event.target.name] = event.target.value;
@@ -23,26 +37,19 @@ export default class Admin extends React.Component {
     if (this.validate()) {
       const post = this.state.input;
       console.log(post);
-      axios.post(`http://localhost:5000/clinic`, post).then((res) => {
-        console.log("res");
-        console.log(res);
-        console.log(res.data);
-        alert("Clinic created successfully.");
-      });
+      AddNewClinic(post)
+        .then((res) => {
+          console.log("res");
+          console.log(res);
+          console.log(res.data);
+          alert("Clinic created successfully.");
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
     }
   }
-  getAllClinics = () => {
-    axios
-      .get(`http://localhost:5000/clinic`)
-      .then((response) => {
-        console.log("RESPONSE: ", response);
-        console.log("DATA: ", response.data);
-        this.setState({ clinics: response.data });
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
-  };
+
   validate() {
     let input = this.state.input;
     let errors = {};
@@ -60,26 +67,38 @@ export default class Admin extends React.Component {
     });
     return isValid;
   }
+
+  deleteClinic = (id) => {
+    deleteClinicByID(id)
+      .then((res) => {
+        console.log(`The Article with the ID ${id} has been deleted.`);
+
+        const newClinicsList = this.state.clinics.filter((clinic) => {
+          return clinic._id !== id;
+        });
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  };
   render() {
     const allClinics = this.state.clinics.map((clinic, index) => {
       return (
-        <tr>
-          <th scope="row">{index + 1}</th>
-          <td className="cellpadding">{clinic.clincName}</td>
-          <td>{clinic.serviceType}</td>
-          <td>{clinic.rating}</td>
-          <td>{clinic.locationId}</td>
-          <td>
-            <a href="">Edit</a>
-            {"  "} <a href="">Delete</a>
-          </td>
-        </tr>
+        <Clinic
+          Name={clinic.clincName}
+          Service={clinic.serviceType}
+          Rating={clinic.rating}
+          id={clinic._id}
+          deleteClinic={this.deleteClinic}
+          key={index}
+          IdNumber={index + 1}
+          Image={clinic.clinicImage}
+        />
       );
     });
     return (
       <div>
-        <button onClick={this.getAllClinics}>GET all clinics</button>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -87,6 +106,7 @@ export default class Admin extends React.Component {
               <th scope="col">Services</th>
               <th scope="col">Rating</th>
               <th scope="col">Location</th>
+              <th scope="col">Image</th>
               <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
@@ -124,10 +144,11 @@ export default class Admin extends React.Component {
                 onChange={this.handleChange}
                 name="clinicImage"
                 value={this.state.input.clinicImage}
+                type="file"
               />
             </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Services</label>
+            <div className="form-group">
+              <label>Services</label>
               <input
                 className="form-control"
                 placeholder="Enter email"
@@ -137,15 +158,27 @@ export default class Admin extends React.Component {
               />
               <div className="text-danger">{this.state.errors.serviceType}</div>
             </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Rating</label>
-              <input
+            <div className="form-group">
+              <label>Rating</label>
+              <select
+                className="form-control"
+                name="rating"
+                id="ratings"
+                onChange={this.handleChange}
+                value={this.state.input.rating}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              {/* <input
                 className="form-control"
                 placeholder="Enter email"
                 name="rating"
-                onChange={this.handleChange}
-                value={this.state.input.rating}
-              />
+               
+              /> */}
             </div>
             <button type="submit" className="btn btn-primary">
               Submit
