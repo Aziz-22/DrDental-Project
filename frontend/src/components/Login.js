@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Nav from './Nav'
 export default class Login extends Component {
 
   constructor(props) {
@@ -10,7 +11,8 @@ export default class Login extends Component {
 
 
       loginDetails: {},
-
+      isLogged: true,
+      userId: ""
    
     };
 
@@ -18,6 +20,7 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+ 
   handleSubmit = (event) => {
     
     event.preventDefault();
@@ -27,10 +30,13 @@ export default class Login extends Component {
       console.log(res);
       console.log(res.data);
       alert("Successfully.");
-      
+      this.setState({islogged: true , userId:res.data._id});
+      this.LoggedIn();
       // Redirect to the Home
-      window.location.href = "http://localhost:3000/Home";
+      //window.location.href = "http://localhost:3000/Home";
+     
     });
+    
 
     // {email:email}
   }
@@ -48,6 +54,13 @@ export default class Login extends Component {
     
 
   }
+
+  LoggedIn = () => {
+  
+      this.props.isLogged(this.state.isLogged,this.state.userId);
+    
+} 
+
   render() {
     return (
       <div>

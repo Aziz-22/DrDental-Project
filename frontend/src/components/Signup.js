@@ -18,7 +18,8 @@ export default class Signup extends Component {
 
     const newUser = this.state.input;
     console.log(newUser);
-    axios.post(`http://localhost:5000/signup`, newUser).then((res) => {
+    axios.post(`http://localhost:5000/signup`, newUser)
+    .then((res) => {
       console.log("res");
       console.log(res);
       console.log(res.data);
@@ -26,6 +27,9 @@ export default class Signup extends Component {
 
       //Redirect To the Login Page
       window.location.href = "http://localhost:3000/Login";
+    })
+    .catch((err) => {
+      console.log("ERR: ", err);
     });
   }
 
