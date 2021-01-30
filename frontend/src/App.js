@@ -14,7 +14,6 @@ export default class App extends Component {
         <div className="mainDiv">
           <Nav />
           <hr />
-          <Route path="/Clinics" component={Clinics} />
           <Route path="/Profile" component={Profile} />
           <Route path="/Appointment" component={Appointment} />
           <Route exact path="/Admin" component={Admin}></Route>

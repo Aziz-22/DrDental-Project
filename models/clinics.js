@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ClinicsSchema = new mongoose.Schema(
   {
     clincName: { type: String, required: true },
-    locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locations" },
+    locationId: { type: String },
     rating: { type: String },
     clinicImage: { type: String },
     serviceType: { type: [String], required: true },

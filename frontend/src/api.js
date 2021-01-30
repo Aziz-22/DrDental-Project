@@ -18,4 +18,9 @@ const deleteClinicByID = (id) => {
   return axios.delete(`${API_URL}/clinic/${id}`);
 };
 
-export { getAllClinics, AddNewClinic, deleteClinicByID };
+// Edit Clinic by ID
+const editClinicByID = (id, editedClinic) => {
+  console.log("eidt",editedClinic)
+  return axios.put(`${API_URL}/clinic/${id}`,editedClinic);
+};
+export { getAllClinics, AddNewClinic, deleteClinicByID, editClinicByID };

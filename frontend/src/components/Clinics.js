@@ -50,7 +50,7 @@ export default class Clinics extends Component {
                 {clinics.serviceType} <hr></hr>
               </Card.Text>
               <div className="reserveButton">
-                <Card.Link href="#">Location</Card.Link>
+                <Card.Link href={clinics.locationId} target="_blank">Location</Card.Link>
                 <Button variant="info">Reserve</Button>
               </div>
             </Card.Body>
