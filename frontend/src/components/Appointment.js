@@ -39,7 +39,6 @@ export default class Appointment extends Component {
 
     return (
       <div className="d-flex justify-content-center mt-5">
-        <button onClick={this.componentDidMount}></button>
         <table class="table w-75 text-center">
           <thead>
             <tr>

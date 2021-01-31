@@ -7,6 +7,7 @@ import Clinics from "./Clinics";
 import Contactus from "./Contactus";
 import Appointment from "./Appointment";
 import Profile from "./Profile";
+import Admin from "./Admin";
 
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
@@ -128,6 +129,7 @@ class Nav extends Component {
             />
             <Route path="/SignUp" component={Signup} />
             <Route path="/Contactus" component={Contactus} />
+            <Route path="/Admin" component={Admin} />
             <Route
               path="/Clinics"
               component={() => (

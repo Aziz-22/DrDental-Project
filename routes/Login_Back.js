@@ -7,20 +7,21 @@ const router = express.Router();
 // import the models
 const user = require("../models/users");
 
-
 router.post("/login", (req, res) => {
-
-    console.log("My body =>>>> ", req.body);
-    
-  user.findOne({email: req.body.email}, (error, foundUser) => {
-    if (error) {
-      res.json(error);
-    } else {
-    console.log(foundUser);
-      res.json(foundUser);
+  console.log("My body =>>>> ", req.body);
+  // db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
+  user.find(
+    { $and: [{ email: req.body.email }, { password: req.body.password }] },
+    (error, foundUser) => {
+      if (error) {
+        console.log("NOT FOUND ", error);
+        res.json(error);
+      } else {
+        console.log("FOUND ", foundUser);
+        res.json(foundUser);
+      }
     }
-  });
+  );
 });
-
 
 module.exports = router;
