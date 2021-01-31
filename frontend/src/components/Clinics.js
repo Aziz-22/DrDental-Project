@@ -4,13 +4,17 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { getAllClinics } from "../api";
+import { getAllClinics, AddNewAppointment } from "../api";
 
 export default class Clinics extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allClinics: [],
+      date: "",
+      newAppointment: {},
+      allAppointment: [],
+      clinicId: "",
     };
   }
   componentDidMount() {
@@ -24,6 +28,33 @@ export default class Clinics extends Component {
         console.log("ERR: ", err);
       });
   }
+
+  handleChange = (event) => {
+    this.setState({ date: event.target.value });
+    console.log(event.target.value);
+  };
+
+  addAppointment = (clinicId) => {
+    console.log(clinicId);
+    let newAppointment = this.state.newAppointment;
+    newAppointment["date"] = this.state.date;
+    newAppointment["patientId"] = this.props.userId;
+    newAppointment["clinicId"] = clinicId;
+
+    AddNewAppointment(newAppointment)
+      .then((response) => {
+        console.log("RESPONSE: ", response);
+        console.log("DATA: ", response.data);
+        this.setState({ allAppointment: response.data });
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  };
+
+  printclinicId = (clinicId) => {
+    this.setState({ clinicId: clinicId });
+  };
 
   render() {
     const allClinics = this.state.allClinics;
@@ -50,8 +81,68 @@ export default class Clinics extends Component {
                 {clinics.serviceType} <hr></hr>
               </Card.Text>
               <div className="reserveButton">
-                <Card.Link href={clinics.locationId} target="_blank">Location</Card.Link>
-                <Button variant="info">Reserve</Button>
+                <Card.Link href={clinics.locationId} target="_blank">
+                  Location
+                </Card.Link>
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  onClick={() => {
+                    this.printclinicId(clinics._id);
+                  }}
+                >
+                  Reserve
+                </button>
+
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          Pick a date
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <input onChange={this.handleChange} />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          onClick={() => {
+                            this.addAppointment(this.state.clinicId);
+                          }}
+                          class="btn btn-primary"
+                        >
+                          Save changes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Card.Body>
           </Card>

@@ -18,9 +18,40 @@ const deleteClinicByID = (id) => {
   return axios.delete(`${API_URL}/clinic/${id}`);
 };
 
+//add new appointment
+const AddNewAppointment = (newAppointment) => {
+  return axios.post(`${API_URL}/Reserve`, newAppointment);
+};
+
 // Edit Clinic by ID
 const editClinicByID = (id, editedClinic) => {
-  console.log("eidt",editedClinic)
-  return axios.put(`${API_URL}/clinic/${id}`,editedClinic);
+  console.log("eidt", editedClinic);
+  return axios.put(`${API_URL}/clinic/${id}`, editedClinic);
 };
-export { getAllClinics, AddNewClinic, deleteClinicByID, editClinicByID };
+
+// Get user
+const getUserProfile = (id) => {
+  return axios.get(`${API_URL}/Profile/${id}`);
+};
+
+// Edit user by ID
+const editUser = (id, editedUser) => {
+  console.log("eidt", editedUser);
+  return axios.put(`${API_URL}/Profile/${id}`, editedUser);
+};
+
+// Get user appointment
+const getUserAppointment = (userId) => {
+  return axios.post(`${API_URL}/Appointment`, userId);
+};
+
+export {
+  getAllClinics,
+  AddNewClinic,
+  deleteClinicByID,
+  editClinicByID,
+  AddNewAppointment,
+  getUserProfile,
+  editUser,
+  getUserAppointment,
+};

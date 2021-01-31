@@ -36,11 +36,13 @@ td {
 div.col-sm-4 {
   margin-top: 36px;
 }
+
 #profileBox {
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 5px 5px;
   margin: 50px 50px 50px;
+  background-color: #ffffff;
 }
 
 .reserveButton {
@@ -48,15 +50,22 @@ div.col-sm-4 {
   display: flex;
   justify-content: space-around;
 }
+div.col {
+  padding-left: 15%;
+}
+
+/* .table {
+  text-align: center;
+} */
 
 /* Abdulaziz & Shahad CSS */
 
 .Nav-Links {
   margin-top: 40px;
 }
-.nav-link{
+.nav-link {
   color: black;
 }
-.logedinIcon{
+.logedinIcon {
   width: 50px;
 }

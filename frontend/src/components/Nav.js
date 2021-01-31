@@ -74,42 +74,35 @@ class Nav extends Component {
               </ul>
 
               {this.state.isLogged ? (
-                
-                  <div class="btn-group dropleft">
-                    <button
+                <div class="btn-group dropleft">
+                  <button
                     className="logedinIcon"
-                      type="button"
-                      class="btn btn-info dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <span className={`material-icons`}>account_circle</span>
-                    </button>
-                    <div class="dropdown-menu">
+                    type="button"
+                    class="btn btn-info dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className={`material-icons`}>account_circle</span>
+                  </button>
+                  <div class="dropdown-menu">
                     <Link to="/Profile">
-                        <a class="dropdown-item" href="#">
-                          Profile
-                        </a>
-                      </Link>
-                      <Link to="/Appointment">
-                        <a class="dropdown-item" href="#">
-                          Appointment
-                        </a>
-                      </Link>
-                      <Link to="/Home">
-                        <a
-                          class="dropdown-item"
-                          href=""
-                          onClick={this.LoggedOut}
-                        >
-                          Logout <span class="sr-only"></span>
-                        </a>
-                      </Link>
-                    </div>
+                      <a class="dropdown-item" href="#">
+                        Profile
+                      </a>
+                    </Link>
+                    <Link to="/Appointment">
+                      <a class="dropdown-item" href="#">
+                        Appointment
+                      </a>
+                    </Link>
+                    <Link to="/Home">
+                      <a class="dropdown-item" href="" onClick={this.LoggedOut}>
+                        Logout <span class="sr-only"></span>
+                      </a>
+                    </Link>
                   </div>
-                 
-               
+                </div>
               ) : (
                 <form class="form-inline my-2 my-lg-0">
                   <Link to="/Login">
@@ -137,15 +130,30 @@ class Nav extends Component {
             <Route path="/Contactus" component={Contactus} />
             <Route
               path="/Clinics"
-              component={() => <Clinics isLogged={this.state.isLogged} />}
+              component={() => (
+                <Clinics
+                  userId={this.state.userId}
+                  isLogged={this.state.isLogged}
+                />
+              )}
             />
             <Route
               path="/Profile"
-              component={() => <Profile userId={this.state.userId} isLogged={this.state.isLogged} />}
+              component={() => (
+                <Profile
+                  userId={this.state.userId}
+                  isLogged={this.state.isLogged}
+                />
+              )}
             />
             <Route
               path="/Appointment"
-              component={() => <Appointment userId={this.state.userId} isLogged={this.state.isLogged} />}
+              component={() => (
+                <Appointment
+                  userId={this.state.userId}
+                  isLogged={this.state.isLogged}
+                />
+              )}
             />
           </Switch>
         </div>

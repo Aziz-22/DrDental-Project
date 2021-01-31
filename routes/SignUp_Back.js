@@ -7,10 +7,7 @@ const router = express.Router();
 // import the models
 const user = require("../models/users");
 
-
 router.post("/signup", (req, res) => {
-
-    
   user.create(req.body, (error, newUser) => {
     if (error) {
       res.json(error);
@@ -19,6 +16,5 @@ router.post("/signup", (req, res) => {
     }
   });
 });
-
 
 module.exports = router;

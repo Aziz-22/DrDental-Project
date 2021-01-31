@@ -8,11 +8,20 @@ const indexRouter = require("./routes/index");
 // const articlesRouter = require("./routes/articles");
 const adminRouter = require("./routes/Admin");
 
-// Sign Up Router 
+// Sign Up Router
 const signUpRouter = require("./routes/SignUp_Back");
 
 // Login Router
 const loginRouter = require("./routes/Login_Back");
+
+// Reserve_Appointment Router
+const Reserve_AppointmentRouter = require("./routes/Reserve_Appointment");
+
+// User profile Router
+const userProfile = require("./routes/Profile");
+
+// User Appointment Router
+const userAppointment = require("./routes/Appointments");
 
 // Require DB Configuration File
 const db_url = require("./db");
@@ -54,6 +63,9 @@ app.use(indexRouter);
 app.use(adminRouter);
 app.use(signUpRouter);
 app.use(loginRouter);
+app.use(Reserve_AppointmentRouter);
+app.use(userProfile);
+app.use(userAppointment);
 
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);

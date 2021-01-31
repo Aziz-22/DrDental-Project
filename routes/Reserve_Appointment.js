@@ -4,21 +4,29 @@ const express = require("express");
 // Instantiate a Router (mini app that only handles routes)
 const router = express.Router();
 
-// import the models
-const clinic = require("../models/clinics");
+const Appointments = require("../models/appointment");
+
 /**
  * Action:      INDEX
  * Method:      GET
  * URI:         /
- * Description: Get all the clinics
+ * Description: Get the Root Route
  */
-router.get("/clinic", (req, res) => {
-  clinic.find({}, (error, allClinics) => {
+
+router.post("/Reserve", (req, res) => {
+  Appointments.create(req.body, (error, newAppointment) => {
     if (error) {
       res.json(error);
     } else {
-      res.json(allClinics);
+      res.json(newAppointment);
     }
+  });
+});
+
+router.get("/test", (req, res) => {
+  console.log("index.js");
+  res.json({
+    message: "test to index.js",
   });
 });
 
