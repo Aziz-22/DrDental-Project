@@ -5,6 +5,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { getAllClinics, AddNewAppointment } from "../api";
+import moment from "moment";
+import ReactTimeslotCalendar from "react-timeslot-calendar";
+import AvailableTimes from "react-available-times";
 
 export default class Clinics extends Component {
   constructor(props) {
@@ -29,10 +32,7 @@ export default class Clinics extends Component {
       });
   }
 
-  handleChange = (event) => {
-    this.setState({ date: event.target.value });
-    console.log(event.target.value);
-  };
+
 
   addAppointment = (clinicId) => {
     console.log(clinicId);
@@ -55,6 +55,7 @@ export default class Clinics extends Component {
   printclinicId = (clinicId) => {
     this.setState({ clinicId: clinicId });
   };
+
 
   render() {
     const allClinics = this.state.allClinics;
@@ -104,7 +105,7 @@ export default class Clinics extends Component {
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
                 >
-                  <div class="modal-dialog" role="document">
+                  <div class="modal-dialog	modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
@@ -120,7 +121,27 @@ export default class Clinics extends Component {
                         </button>
                       </div>
                       <div class="modal-body">
-                        <input onChange={this.handleChange} />
+                        <AvailableTimes
+                          weekStartsOn="sunday"
+                          
+                          onChange={(selections) => {
+                            selections.forEach(({ start, end }) => {
+                              this.setState({date:start})
+                              console.log("Start:", start, "End:", end);
+                            });
+                          }}
+                        
+                          height={400}
+                          recurring={false}
+                          availableDays={[
+                            "sunday",
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                          ]}
+                          availableHourRange={{ start: 9, end: 19 }}
+                        />
                       </div>
                       <div class="modal-footer">
                         <button

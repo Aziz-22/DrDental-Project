@@ -10,7 +10,11 @@ export default class Appointment extends Component {
   }
   componentDidMount() {
     console.log(this.props.userId);
-    getUserAppointment(this.props.userId)
+   
+    let userId = {}
+    userId["patientId"] = this.props.userId;
+    if(this.props.isLogged === true){
+      getUserAppointment(userId)
       .then((response) => {
         console.log("RESPONSE: ", response);
         console.log("DATA: ", response.data);
@@ -20,6 +24,8 @@ export default class Appointment extends Component {
       .catch((err) => {
         console.log("ERR: ", err);
       });
+    }
+   
   }
 
   render() {

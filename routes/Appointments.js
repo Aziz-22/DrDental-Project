@@ -25,7 +25,10 @@ router.post("/Appointment", (req, res) => {
     })
     .then((allAppointment) => {
       res.json(allAppointment);
-    });
+    })
+    .catch((err)=>{
+      res.json(err);
+    })
   console.log(appointment);
 });
 

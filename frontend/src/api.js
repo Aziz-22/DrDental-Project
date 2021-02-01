@@ -40,6 +40,7 @@ const editUser = (id, editedUser) => {
   return axios.put(`${API_URL}/Profile/${id}`, editedUser);
 };
 
+
 // Get user appointment
 const getUserAppointment = (userId) => {
   return axios.post(`${API_URL}/Appointment`, userId);
