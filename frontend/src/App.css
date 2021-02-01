@@ -60,6 +60,10 @@ div.col {
 
 /* Abdulaziz & Shahad CSS */
 
+.bg-light {
+  background-color: #f8f9fa !important;
+  margin-top: -25px;
+}
 .Nav-Links {
   margin-top: 40px;
 }
@@ -69,6 +73,107 @@ div.col {
 .logedinIcon {
   width: 50px;
 }
-.modal-lg{
-  width: 1400px
+
+.carousel-item {
+  height: 600px;
+  position: relative;
+}
+
+/* .overlay-text {
+  position: absolute;
+bottom: 0;
+border: 20px solid gray;
+border-radius: 50px 50px;
+} */
+.border{
+
+  border: 20px solid black;
+
+}
+.social-icons {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+}
+.Social-Icon {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 240px;
+  list-style: none;
+}
+
+.website-rights {
+  color: white !important;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.about-us {
+  text-align: center;
+  color: darkcyan;
+}
+.P-about-us {
+text-align: center;
+padding: 0px 118px;
+background-color: aliceblue;
+margin-bottom: 10px;
+}
+.Services {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.our-services {
+  text-align: center;
+  color: darkcyan;
+}
+
+#Service-One {
+  text-align: center;
+}
+#Service-One:hover {
+  color: darkcyan;
+}
+
+#Service-Two {
+  text-align: center;
+}
+#Service-Two:hover {
+  color: darkcyan;
+}
+#Service-Three {
+  text-align: center;
+}
+
+#Service-Three:hover {
+  color: darkcyan;
+}
+
+.Cards {
+  display: flex;
+  justify-content: space-around;
+   
+}
+
+
+.Info {
+  text-align: left;
+  display: grid;
+  margin-bottom: 20px;
+  color: snow;
+}
+.contact-us {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+/* END Abdulaziz & Shahad CSS */
+
+.modal-lg {
+  width: 1400px;
 }

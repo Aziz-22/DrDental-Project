@@ -128,6 +128,9 @@ class Nav extends Component {
               component={() => <Login isLogged={this.isLogged} />}
             />
             <Route path="/SignUp" component={Signup} />
+            {/* <Abduaziz And Shahad> */}
+            <Route path="/Admin" component={Admin} />
+            {/* </Abduaziz And Shahad/> */}
             <Route path="/Contactus" component={Contactus} />
             <Route path="/Admin" component={Admin} />
             <Route

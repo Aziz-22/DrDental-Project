@@ -14,6 +14,9 @@ export default class Signup extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+
+
   // Validate HERE
   handleSubmit(event) {
     event.preventDefault();

@@ -61,6 +61,7 @@ export default class Clinics extends Component {
     const allClinics = this.state.allClinics;
     const clinics = allClinics.map((clinics, index) => {
       return (
+        
         <Col>
           <Card style={{ width: "18rem" }}>
             <Card.Img
