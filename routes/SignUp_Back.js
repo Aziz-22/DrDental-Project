@@ -12,7 +12,7 @@ const user = require("../models/users");
 //   firstName: "NewUSer",
 //   lastName: "New",
 //   email: "New@hotmail.com",
-//   isAdmin: false,
+//   isAdmin: true,
 //   password: 1235,
 // });
 

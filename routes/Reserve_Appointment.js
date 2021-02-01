@@ -14,6 +14,7 @@ const Appointments = require("../models/appointment");
  */
 
 router.post("/Reserve", (req, res) => {
+  console.log(req.body.date)
   Appointments.create(req.body, (error, newAppointment) => {
     if (error) {
       res.json(error);

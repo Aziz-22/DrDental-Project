@@ -32,5 +32,15 @@ router.post("/Appointment", (req, res) => {
   console.log(appointment);
 });
 
+router.delete("/Appointment/:id", (req, res) => {
+  Appointments.findByIdAndRemove(req.params.id, (error, updatedAppointments) => {
+    if (error) {
+      res.json(error);
+    } else {
+      res.json(updatedAppointments);
+    }
+  });
+});
+
 // Export the Router so we can use it in the server.js file
 module.exports = router;

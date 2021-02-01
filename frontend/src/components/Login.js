@@ -11,6 +11,7 @@ export default class Login extends Component {
       isLogged: true,
       userId: "",
       error: "",
+      isAdmin: false 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,13 +36,15 @@ export default class Login extends Component {
 
           if (res.data[0].isAdmin == true) {
             console.log("IS AN ADMIN");
-            window.location.href = "http://localhost:3000/Admin";
+            this.setState({isAdmin: true})
+            
           } else if (res.data[0].isAdmin == false) {
             console.log("IS A USER");
             alert("Successfully.");
             this.setState({ islogged: true, userId: res.data[0]._id });
-            this.LoggedIn();
+            
           }
+          this.LoggedIn();
         } else {
           this.setState({
             error:
@@ -90,7 +93,34 @@ export default class Login extends Component {
   };
 
   LoggedIn = () => {
-    this.props.isLogged(this.state.isLogged, this.state.userId);
+    let LoginState = true;
+    let iduser = "" 
+    let Admin = false
+
+    localStorage.setItem("loggedin", JSON.stringify(LoginState));
+    const lggedin = JSON.parse(localStorage.getItem("loggedin"));
+    LoginState = true;
+    localStorage.setItem("loggedin", JSON.stringify(LoginState));
+
+    localStorage.setItem("admin", JSON.stringify(Admin));
+    const admin = JSON.parse(localStorage.getItem("admin"));
+    Admin = this.state.isAdmin;
+    localStorage.setItem("admin", JSON.stringify(Admin));
+
+    localStorage.setItem("id", JSON.stringify(iduser));
+    const userId = JSON.parse(localStorage.getItem("id"));
+    iduser = this.state.userId;
+    localStorage.setItem("id", JSON.stringify(iduser));
+    console.log(JSON.parse(localStorage.getItem("id")))
+    this.props.isLogged();
+
+    if(this.state.isAdmin){
+      window.location.href = "http://localhost:3000/Admin";
+    }else{
+      window.location.href = "http://localhost:3000/Home";
+    }
+    
+
   };
 
   render() {
@@ -149,6 +179,7 @@ export default class Login extends Component {
                 style={{ width: "100%", marginTop: "10px" }}
                 type="submit"
                 class="btn btn-primary"
+                
               >
                 Login
               </button>

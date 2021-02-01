@@ -46,6 +46,11 @@ const getUserAppointment = (userId) => {
   return axios.post(`${API_URL}/Appointment`, userId);
 };
 
+// Delete appointment by ID
+const deleteAppointmentByID = (id) => {
+  return axios.delete(`${API_URL}/Appointment/${id}`);
+};
+
 export {
   getAllClinics,
   AddNewClinic,
@@ -55,4 +60,5 @@ export {
   getUserProfile,
   editUser,
   getUserAppointment,
+  deleteAppointmentByID
 };

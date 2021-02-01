@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { getUserAppointment } from "../api";
-
+import { getUserAppointment, deleteAppointmentByID } from "../api";
+import Clinics from './Clinics'
 export default class Appointment extends Component {
   constructor(props) {
     super(props);
@@ -9,8 +9,8 @@ export default class Appointment extends Component {
     };
   }
   componentDidMount() {
+    
     console.log(this.props.userId);
-   
     let userId = {}
     userId["patientId"] = this.props.userId;
     if(this.props.isLogged === true){
@@ -28,6 +28,24 @@ export default class Appointment extends Component {
    
   }
 
+  deleteAppointment = (event, id)=>{
+    event.preventDefault();
+    console.log(id)
+    deleteAppointmentByID(id)
+    .then((response) => {
+      console.log("RESPONSE: ", response);
+      console.log("DATA: ", response.data);
+
+      const newAppointmentList = this.state.userAppointment.filter((Appointment) => {
+        return Appointment._id !== id;
+      });
+      this.setState({userAppointment:newAppointmentList})
+    })
+    .catch((err) => {
+      console.log("ERR: ", err);
+    });
+  }
+
   render() {
     const allAppointment = this.state.userAppointment.map(
       (appointment, index) => {
@@ -37,7 +55,9 @@ export default class Appointment extends Component {
 
             <td>{appointment.clinicId.clincName}</td>
             <td>{appointment.date}</td>
-            <td></td>
+           <td><a href="" onClick={(e) => {
+     this.deleteAppointment(e, appointment._id)
+}}> Cancel</a></td>
           </tr>
         );
       }

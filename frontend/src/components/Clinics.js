@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { getAllClinics, AddNewAppointment } from "../api";
+import { getAllClinics, AddNewAppointment,getUserAppointment } from "../api";
 import moment from "moment";
 import ReactTimeslotCalendar from "react-timeslot-calendar";
 import AvailableTimes from "react-available-times";
@@ -14,7 +14,7 @@ export default class Clinics extends Component {
     super(props);
     this.state = {
       allClinics: [],
-      date: "",
+      date: new Date(),
       newAppointment: {},
       allAppointment: [],
       clinicId: "",
@@ -30,6 +30,22 @@ export default class Clinics extends Component {
       .catch((err) => {
         console.log("ERR: ", err);
       });
+
+    console.log(this.props.userId);
+    let userId = {}
+    userId["patientId"] = this.props.userId;
+    if(this.props.isLogged === true){
+      getUserAppointment(userId)
+      .then((response) => {
+        console.log("RESPONSE: ", response);
+        console.log("DATA: ", response.data);
+        this.setState({ allAppointment: response.data });
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+    }
   }
 
 
@@ -37,11 +53,13 @@ export default class Clinics extends Component {
   addAppointment = (clinicId) => {
     console.log(clinicId);
     let newAppointment = this.state.newAppointment;
-    newAppointment["date"] = this.state.date;
+    console.log("Date in adding", this.state.date)
+    newAppointment["date"] = this.state.date.toLocaleString("en-US", {timeZone: "Etc/GMT-6"});
+
     newAppointment["patientId"] = this.props.userId;
     newAppointment["clinicId"] = clinicId;
-
-    AddNewAppointment(newAppointment)
+  
+      AddNewAppointment(newAppointment)
       .then((response) => {
         console.log("RESPONSE: ", response);
         console.log("DATA: ", response.data);
@@ -50,6 +68,8 @@ export default class Clinics extends Component {
       .catch((err) => {
         console.log("ERR: ", err);
       });
+    // }
+   
   };
 
   printclinicId = (clinicId) => {
@@ -66,11 +86,7 @@ export default class Clinics extends Component {
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
-              src={
-                clinics.clinicImage
-                  ? clinics.clinicImage
-                  : "https://e7.pngegg.com/pngimages/574/699/png-clipart-medicine-pharmacy-consultant-pharmacist-clinic-icon-scanner-heart-cartoon-thumbnail.png"
-              }
+              src={clinics.clinicImage}
               width="250"
               height="250"
             />
@@ -86,7 +102,7 @@ export default class Clinics extends Component {
                 <Card.Link href={clinics.locationId} target="_blank">
                   Location
                 </Card.Link>
-                <button
+                {this.props.isLogged ?( <button
                   type="button"
                   class="btn btn-info"
                   data-toggle="modal"
@@ -96,7 +112,16 @@ export default class Clinics extends Component {
                   }}
                 >
                   Reserve
-                </button>
+                </button>) : ( <button
+                  type="button"
+                  class="btn btn-info"
+                  onClick={() => {
+                    alert("you have to login :)")
+                  }}
+                >
+                  Reserve
+                </button>)}
+               
 
                 <div
                   class="modal fade"

@@ -129,15 +129,13 @@ export default class Profile extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="uplosdImage">
-                  <p>Upload your Image</p>
-                </div>
               </Col>
               <Col>
                 <h1>Your Profile</h1>
               </Col>
             </Row>
           </Container>
+          <br/>
           <Container>
             <Container>
               <Form>
@@ -209,7 +207,9 @@ export default class Profile extends Component {
                   >
                     Update
                   </button>
+                 
                 </Col>
+                <br/>
               </Form>
             </Container>
           </Container>
