@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "../App.css";
-import Nav from "./Nav";
+import { userLogin } from "../api";
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      // the values of the input fileds for login 
       loginDetails: {},
+      // check if the user is logged or not 
       isLogged: true,
+      // the loggedin user id 
       userId: "",
+      // errors from the validation of the login form
       error: "",
+      // check if the user is admin or not 
       isAdmin: false,
     };
 
@@ -18,6 +23,7 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // check if the values enterd in the (loginDetails) state is in the database 
   handleSubmit = (event) => {
     event.preventDefault();
     const loginData = this.state.loginDetails;
@@ -25,8 +31,7 @@ export default class Login extends Component {
 
     // Return True
 
-    axios
-      .post(`http://localhost:5000/login`, loginData)
+    userLogin(loginData)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -58,6 +63,7 @@ export default class Login extends Component {
       });
   };
 
+  // get the values of the input fileds and put them in the state (loginDetails) for login 
   handleChange = (event) => {
     let dataInput = this.state.loginDetails;
 
@@ -69,6 +75,7 @@ export default class Login extends Component {
     });
   };
 
+  // add the login details (isLogged, userID, isAdmin) to the local storage 
   LoggedIn = () => {
     let LoginState = true;
     let iduser = "";
@@ -89,6 +96,7 @@ export default class Login extends Component {
     iduser = this.state.userId;
     localStorage.setItem("id", JSON.stringify(iduser));
     console.log(JSON.parse(localStorage.getItem("id")));
+    
     this.props.isLogged();
 
     if (this.state.isAdmin) {

@@ -51,6 +51,15 @@ const deleteAppointmentByID = (id) => {
   return axios.delete(`${API_URL}/Appointment/${id}`);
 };
 
+// User Login
+const userLogin = (loginData) => {
+  return axios.post(`${API_URL}/login`,loginData);
+};
+
+// User Sign Up
+const userSignUp = (SignUpData) => {
+  return axios.post(`${API_URL}/signup`,SignUpData);
+};
 export {
   getAllClinics,
   AddNewClinic,
@@ -60,5 +69,7 @@ export {
   getUserProfile,
   editUser,
   getUserAppointment,
-  deleteAppointmentByID
+  deleteAppointmentByID,
+  userSignUp,
+  userLogin
 };

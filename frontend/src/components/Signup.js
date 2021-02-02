@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "../App.css";
-import Login from "./Login";
+import { userSignUp } from "../api";
 export default class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      // the input fileds value 
       input: {},
-      error: "", // This For Error
+      error: "", // This For Error in the validation func
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +38,8 @@ export default class Signup extends Component {
       return false;
     }
   };
+
+  // Add the new user info to the database (Sign Up)
   handleSubmit(event) {
     event.preventDefault();
 
@@ -49,8 +51,7 @@ export default class Signup extends Component {
       // Here To check if the returnBoolean false, that's mean everything good and will save the new account in the database.
       const newUser = this.state.input;
       console.log(newUser);
-      axios
-        .post(`http://localhost:5000/signup`, newUser)
+      userSignUp(newUser)
         .then((res) => {
           console.log("res");
           console.log(res);
@@ -71,6 +72,7 @@ export default class Signup extends Component {
     }
   }
 
+  // Get the input fileds value and add them to the (input) state 
   handleChange = (event) => {
     let dataInput = this.state.input;
 

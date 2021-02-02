@@ -7,10 +7,8 @@ const router = express.Router();
 
 const Appointments = require("../models/appointment");
 
-const Clinics = require("../models/clinics");
 
 /**
- * Action:      INDEX
  * Method:      POST
  * URI:         /
  * Description: Get all Appointment of user  
@@ -33,8 +31,26 @@ router.post("/Appointment", (req, res) => {
 });
 
 
+
 /**
- * Action:      INDEX
+ * Method:      POST
+ * URI:         /
+ * Description: create new appointment 
+ */
+
+router.post("/Reserve", (req, res) => {
+  console.log(req.body.date)
+  Appointments.create(req.body, (error, newAppointment) => {
+    if (error) {
+      res.json(error);
+    } else {
+      res.json(newAppointment);
+    }
+  });
+});
+
+
+/**
  * Method:      DELETE
  * URI:         /
  * Description: delete an Appointment of user  
@@ -49,6 +65,8 @@ router.delete("/Appointment/:id", (req, res) => {
     }
   });
 });
+
+
 
 // Export the Router so we can use it in the server.js file
 module.exports = router;
