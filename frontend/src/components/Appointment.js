@@ -1,50 +1,53 @@
 import React, { Component } from "react";
 import { getUserAppointment, deleteAppointmentByID } from "../api";
-import Clinics from './Clinics'
+
 export default class Appointment extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // will have all the user appointment
       userAppointment: [],
     };
   }
   componentDidMount() {
-    
+    // get all user appointment from database and save it in the state (userAppointment)
     console.log(this.props.userId);
-    let userId = {}
+    let userId = {};
     userId["patientId"] = this.props.userId;
-    if(this.props.isLogged === true){
+    if (this.props.isLogged === true) {
       getUserAppointment(userId)
+        .then((response) => {
+          console.log("RESPONSE: ", response);
+          console.log("DATA: ", response.data);
+          this.setState({ userAppointment: response.data });
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
+  }
+
+  // canceling (delete) appointment from the database
+  deleteAppointment = (event, id) => {
+    event.preventDefault();
+    console.log(id);
+    deleteAppointmentByID(id)
       .then((response) => {
         console.log("RESPONSE: ", response);
         console.log("DATA: ", response.data);
-        this.setState({ userAppointment: response.data });
-        console.log(response.data);
+
+        const newAppointmentList = this.state.userAppointment.filter(
+          (Appointment) => {
+            return Appointment._id !== id;
+          }
+        );
+        this.setState({ userAppointment: newAppointmentList });
       })
       .catch((err) => {
         console.log("ERR: ", err);
       });
-    }
-   
-  }
-
-  deleteAppointment = (event, id)=>{
-    event.preventDefault();
-    console.log(id)
-    deleteAppointmentByID(id)
-    .then((response) => {
-      console.log("RESPONSE: ", response);
-      console.log("DATA: ", response.data);
-
-      const newAppointmentList = this.state.userAppointment.filter((Appointment) => {
-        return Appointment._id !== id;
-      });
-      this.setState({userAppointment:newAppointmentList})
-    })
-    .catch((err) => {
-      console.log("ERR: ", err);
-    });
-  }
+  };
 
   render() {
     const allAppointment = this.state.userAppointment.map(
@@ -55,9 +58,16 @@ export default class Appointment extends Component {
 
             <td>{appointment.clinicId.clincName}</td>
             <td>{appointment.date}</td>
-           <td><a href="" onClick={(e) => {
-     this.deleteAppointment(e, appointment._id)
-}}> Cancel</a></td>
+            <td>
+              <a
+                href=""
+                onClick={(e) => {
+                  this.deleteAppointment(e, appointment._id);
+                }}
+              >
+                Cancel
+              </a>
+            </td>
           </tr>
         );
       }

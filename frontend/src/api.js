@@ -29,7 +29,7 @@ const editClinicByID = (id, editedClinic) => {
   return axios.put(`${API_URL}/clinic/${id}`, editedClinic);
 };
 
-// Get user
+// Get user data
 const getUserProfile = (id) => {
   return axios.get(`${API_URL}/Profile/${id}`);
 };

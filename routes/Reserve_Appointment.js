@@ -8,9 +8,9 @@ const Appointments = require("../models/appointment");
 
 /**
  * Action:      INDEX
- * Method:      GET
+ * Method:      POST
  * URI:         /
- * Description: Get the Root Route
+ * Description: create new appointment 
  */
 
 router.post("/Reserve", (req, res) => {
@@ -24,12 +24,6 @@ router.post("/Reserve", (req, res) => {
   });
 });
 
-router.get("/test", (req, res) => {
-  console.log("index.js");
-  res.json({
-    message: "test to index.js",
-  });
-});
 
 // Export the Router so we can use it in the server.js file
 module.exports = router;

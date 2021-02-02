@@ -4,7 +4,6 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
 import Clinics from "./Clinics";
-import Contactus from "./Contactus";
 import Appointment from "./Appointment";
 import Profile from "./Profile";
 import Admin from "./Admin";
@@ -14,30 +13,41 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // get the data if the user is logged or not from local storage
       isLogged: JSON.parse(localStorage.getItem("loggedin")),
+      // get the user ID from local storage
       userId: JSON.parse(localStorage.getItem("id")),
+      // get the data if the user is Admin or not from local storage
       isAdmin: JSON.parse(localStorage.getItem("admin")),
     };
   }
+
+  // will excute when the user is logged 
   isLogged = () => {
     console.log(localStorage.getItem("id"));
     console.log(localStorage.getItem("loggedin"));
-    // this.setState({ isLogged: JSON.parse(localStorage.getItem('loggedin')), userId: JSON.parse(localStorage.getItem('id'))});
     console.log(this.state.isLogged, this.state.userId);
+    this.setState({
+      isLogged: JSON.parse(localStorage.getItem("loggedin")),
+      userId: JSON.parse(localStorage.getItem("id")),
+      isAdmin: JSON.parse(localStorage.getItem("admin")),
+    });
   };
 
+  // if the user clicked logout this function will clear the local storage
   LoggedOut = () => {
     console.log("Logout");
     localStorage.clear();
     this.setState({ isLogged: false });
   };
+
   render() {
     return (
       <Router>
         <div className="Nav">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="">
-              <img src="https://i.imgur.com/NF0AUHu.png" width="70%" ></img>
+              <img src="https://i.imgur.com/NF0AUHu.png" width="70%"></img>
             </a>
             <button
               className="navbar-toggler"
@@ -51,11 +61,14 @@ class Nav extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                   <Link to="/Home">
-                    <a className="nav-link" href="">
+                    <a className="nav-link" href="/Home">
                       Home <span className="sr-only"></span>
                     </a>
                   </Link>
@@ -68,20 +81,12 @@ class Nav extends Component {
                     </a>
                   </Link>
                 </li>
-
-                <li className="nav-item active">
-                  <Link to="/Contactus">
-                    <a className="nav-link" href="">
-                      Contact Us <span className="sr-only"></span>
-                    </a>
-                  </Link>
-                </li>
               </ul>
 
               {this.state.isLogged ? (
                 <div className="btn-group dropleft">
                   <button
-                    className="logedinIcon"
+                    className="logedinIcon profileIcon"
                     type="button"
                     className="btn btn-info dropdown-toggle"
                     data-toggle="dropdown"
@@ -92,20 +97,27 @@ class Nav extends Component {
                   </button>
 
                   {this.state.isAdmin ? (
-                   <div className="dropdown-menu">
-                  
-                   <Link to="/Home">
-                     <a
-                       className="dropdown-item"
-                       href=""
-                       onClick={this.LoggedOut}
-                     >
-                       Logout <span className="sr-only"></span>
-                     </a>
-                   </Link>
-                 </div>
-                  ) : (
                     <div className="dropdown-menu">
+                       <Link to="/Admin">
+                       <a
+                          className="dropdown-item"
+                          href=""
+                        >
+                         Admin Panel
+                         </a>
+                       </Link>
+                      <Link to="/Home">
+                        <a
+                          className="dropdown-item"
+                          href=""
+                          onClick={this.LoggedOut}
+                        >
+                          Logout <span className="sr-only"></span>
+                        </a>
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="dropdown-menu ">
                       <Link to="/Profile">
                         <a className="dropdown-item" href="#">
                           Profile
@@ -152,10 +164,9 @@ class Nav extends Component {
               component={() => <Login isLogged={this.isLogged} />}
             />
             <Route path="/SignUp" component={Signup} />
-            {/* <Abduaziz And Shahad> */}
+
             <Route path="/Admin" component={Admin} />
-            {/* </Abduaziz And Shahad/> */}
-            <Route path="/Contactus" component={Contactus} />
+
             <Route path="/Admin" component={Admin} />
             <Route
               path="/Clinics"

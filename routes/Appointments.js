@@ -11,9 +11,9 @@ const Clinics = require("../models/clinics");
 
 /**
  * Action:      INDEX
- * Method:      GET
+ * Method:      POST
  * URI:         /
- * Description: Get the Root Route
+ * Description: Get all Appointment of user  
  */
 
 router.post("/Appointment", (req, res) => {
@@ -31,6 +31,14 @@ router.post("/Appointment", (req, res) => {
     })
   console.log(appointment);
 });
+
+
+/**
+ * Action:      INDEX
+ * Method:      DELETE
+ * URI:         /
+ * Description: delete an Appointment of user  
+ */
 
 router.delete("/Appointment/:id", (req, res) => {
   Appointments.findByIdAndRemove(req.params.id, (error, updatedAppointments) => {
