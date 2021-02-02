@@ -20,9 +20,15 @@ export default class Home extends Component {
                 alt="First slide"
               />
               <div className="border">
-                ujkullllllllllllllllllllllll
-                <span className="overlay-text">lklfmvkfmvfkmvfkmk</span>
-                </div>
+                
+                <span className="overlay-text">About Us</span>
+                 <p id = "" className="overlay-text-P-about-us">
+          Dr Dental is a website the provides many clinics, as well as services,
+          are providing essential healthcare. Our greatest vision is to allow
+          people to reach our services for healthcare, hospitals to reserve an
+          appointment and access to professional care.
+        </p>
+              </div>
             </div>
             <div class="carousel-item">
               <img
@@ -66,17 +72,10 @@ export default class Home extends Component {
           </a>
         </div>
 
-        <div class="circle circle-lg bg-secondary">
-          
-        </div>
+        <div class="circle circle-lg bg-secondary"></div>
 
-        <h1 className="about-us">About Us</h1>
-        <p className="P-about-us">
-          Dr Dental is a website the provides many clinics, as well as services,
-          are providing essential healthcare. Our greatest vision is to allow
-          people to reach our services for healthcare, hospitals to reserve an
-          appointment and access to professional care.
-        </p>
+        
+       
 
         <h1 className="our-services">Our Services</h1>
 
@@ -94,7 +93,6 @@ export default class Home extends Component {
               src="https://www.oldtownsmiles.com/wp-content/uploads/sites/49/2016/07/teeth-whitening-300x201.jpg"
               alt="Card image cap"
             ></img>
-           
 
             <div className="card-body" id="Services">
               <h5 className="card-title" id="Service-One">
@@ -162,7 +160,14 @@ export default class Home extends Component {
         </div>
 
         <footer class="bg-light text-center text-lg-start">
-          <div class="text-center p-3" style={{ backgroundColor: "darkcyan", marginTop: "45px", marginBottom:"-25px" }}>
+          <div
+            class="text-center p-3"
+            style={{
+              backgroundColor: "darkcyan",
+              marginTop: "45px",
+              marginBottom: "-25px",
+            }}
+          >
             <h4 className="contact-us">Contact Us</h4>
             <div className="Info">
               <span>Phone: 966123456789 </span>
@@ -190,8 +195,3 @@ export default class Home extends Component {
     );
   }
 }
-
-//  <footer style={{ backgroundColor: "darkcyan" }}>
-//       //
-//       //     <small className="website-rights"> 2021 © Dr. Dental </small>
-//       //   </footer>
