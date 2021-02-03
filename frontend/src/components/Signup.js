@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "../App.css";
 import { userSignUp } from "../api";
+import { Redirect } from "react-router-dom";
 export default class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // the input fileds value 
+      // the input fileds value
       input: {},
       error: "", // This For Error in the validation func
     };
@@ -60,7 +61,7 @@ export default class Signup extends Component {
           alert("New Account created successfully.");
 
           //Redirect To the Login Page
-          window.location.href = "http://localhost:3000/Login";
+          return <Redirect to="/Login/" />;
         })
         .catch((err) => {
           console.log("ERR: ", err);
@@ -72,7 +73,7 @@ export default class Signup extends Component {
     }
   }
 
-  // Get the input fileds value and add them to the (input) state 
+  // Get the input fileds value and add them to the (input) state
   handleChange = (event) => {
     let dataInput = this.state.input;
 
@@ -92,7 +93,6 @@ export default class Signup extends Component {
             display: "flex",
             justifyContent: "center",
             marginTop: "50px",
-            
           }}
         >
           <div
@@ -103,7 +103,9 @@ export default class Signup extends Component {
               boxShadow: "10px 10px 5px grey",
             }}
           >
-            <h1 style={{ textAlign: "center", marginTop: "20px" }}>Create an Account</h1>
+            <h1 style={{ textAlign: "center", marginTop: "20px" }}>
+              Create an Account
+            </h1>
 
             <span
               style={{ color: "red", textAlign: "center", display: "block" }}
@@ -114,7 +116,9 @@ export default class Signup extends Component {
             <div className="row justify-content-md-center">
               <form className="w-50" onSubmit={this.handleSubmit}>
                 <div class="col-md-12">
-                  <label style={{marginTop: "15px"}}  for="InputFirstName">First Name</label>
+                  <label style={{ marginTop: "15px" }} for="InputFirstName">
+                    First Name
+                  </label>
                   <input
                     type="text"
                     class="form-control"
@@ -124,7 +128,9 @@ export default class Signup extends Component {
                     name="firstName"
                     onChange={this.handleChange}
                   />
-                  <label style={{marginTop: "15px"}} for="InputLastName">Last Name</label>
+                  <label style={{ marginTop: "15px" }} for="InputLastName">
+                    Last Name
+                  </label>
                   <input
                     type="text"
                     class="form-control"
@@ -134,7 +140,9 @@ export default class Signup extends Component {
                     name="lastName"
                     onChange={this.handleChange}
                   />
-                  <label style={{marginTop: "15px"}} for="exampleInputEmail1">Email address</label>
+                  <label style={{ marginTop: "15px" }} for="exampleInputEmail1">
+                    Email address
+                  </label>
                   <input
                     type="email"
                     class="form-control"
@@ -144,7 +152,9 @@ export default class Signup extends Component {
                     name="email"
                     onChange={this.handleChange}
                   />
-                  <label style={{marginTop: "15px"}}  for="Phone">Phone Number</label>
+                  <label style={{ marginTop: "15px" }} for="Phone">
+                    Phone Number
+                  </label>
                   <input
                     type="number"
                     class="form-control"
@@ -155,7 +165,12 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                   />
 
-                  <label style={{marginTop: "15px"}}  for="exampleInputPassword1">Password</label>
+                  <label
+                    style={{ marginTop: "15px" }}
+                    for="exampleInputPassword1"
+                  >
+                    Password
+                  </label>
                   <input
                     type="password"
                     class="form-control"
@@ -166,10 +181,11 @@ export default class Signup extends Component {
                   />
                 </div>
 
-                 <div style={{ marginTop: "10px" }} class="form-check">
+                <div style={{ marginTop: "10px" }} class="form-check">
                   <small id="emailHelp" class="form-text text-muted">
                     <span>
-                      If you already have an account?<a href="./Login"> Login</a>
+                      If you already have an account?
+                      <a href="./Login"> Login</a>
                     </span>
                   </small>
                 </div>
