@@ -20,7 +20,7 @@ export default class Admin extends React.Component {
       errors: {},
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     // getting all clinics from the database (backend - routers) and save it in the state (clinics)
@@ -234,7 +234,11 @@ export default class Admin extends React.Component {
               </div>
               <div class="modal-body">
                 <div>
-                  <form onSubmit={this.handleSubmit}>
+                  <form
+                    onSubmit={(e) => {
+                      this.handleSubmit(e);
+                    }}
+                  >
                     <div className="form-group">
                       <h2>Add Clinic</h2>
                       <label className="control-label">Clinic Name</label>
