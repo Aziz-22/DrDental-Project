@@ -61,7 +61,8 @@ export default class Signup extends Component {
           alert("New Account created successfully.");
 
           //Redirect To the Login Page
-          <Redirect to="/Login" />;
+          // <Redirect to="/Login" />;
+          window.location.href("https://drdentalclinics.herokuapp.com/Login");
         })
         .catch((err) => {
           console.log("ERR: ", err);
