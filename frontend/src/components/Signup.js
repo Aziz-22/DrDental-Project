@@ -59,8 +59,6 @@ export default class Signup extends Component {
           console.log(res);
           console.log(res.data);
 
-          // alert("New Account created successfully.");
-
           //Redirect To the Login Page
           this.setState({
             ...this.state,

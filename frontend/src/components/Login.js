@@ -18,6 +18,8 @@ export default class Login extends Component {
       error: "",
       // check if the user is admin or not
       isAdmin: false,
+      //change the render to use redirect
+      redirect: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -102,13 +104,22 @@ export default class Login extends Component {
     this.props.isLogged();
 
     if (this.state.isAdmin) {
-      return <Redirect to="/Admin/" />;
+      this.setState({
+        ...this.state,
+        redirect: "/Admin",
+      });
     } else {
-      return <Redirect to="/Home/" />;
+      this.setState({
+        ...this.state,
+        redirect: "/Home",
+      });
     }
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div id="" className="container">
         <div
