@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import "../App.css";
 import { userLogin } from "../api";
+import { Redirect } from "react-router-dom";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // the values of the input fileds for login 
+      // the values of the input fileds for login
       loginDetails: {},
-      // check if the user is logged or not 
+      // check if the user is logged or not
       isLogged: true,
-      // the loggedin user id 
+      // the loggedin user id
       userId: "",
       // errors from the validation of the login form
       error: "",
-      // check if the user is admin or not 
+      // check if the user is admin or not
       isAdmin: false,
     };
 
@@ -23,7 +24,7 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // check if the values enterd in the (loginDetails) state is in the database 
+  // check if the values enterd in the (loginDetails) state is in the database
   handleSubmit = (event) => {
     event.preventDefault();
     const loginData = this.state.loginDetails;
@@ -36,7 +37,7 @@ export default class Login extends Component {
         console.log(res);
         console.log(res.data);
 
-        if (res.data.length != 0) { 
+        if (res.data.length != 0) {
           console.log("Found SomeOne");
 
           if (res.data[0].isAdmin == true) {
@@ -44,15 +45,16 @@ export default class Login extends Component {
             // If he an admin will go to the Admin page.
             console.log("IS AN ADMIN");
             this.setState({ isAdmin: true });
-          } else if (res.data[0].isAdmin == false) { 
-            // Else that's mean a user. 
+          } else if (res.data[0].isAdmin == false) {
+            // Else that's mean a user.
             console.log("IS A USER");
-          
+
             this.setState({ islogged: true, userId: res.data[0]._id });
           }
           this.LoggedIn();
         } else {
-          this.setState({ // To print the error message if occurs.
+          this.setState({
+            // To print the error message if occurs.
             error:
               "Wrong password or email. Try again or click Forgot password to reset it",
           });
@@ -63,7 +65,7 @@ export default class Login extends Component {
       });
   };
 
-  // get the values of the input fileds and put them in the state (loginDetails) for login 
+  // get the values of the input fileds and put them in the state (loginDetails) for login
   handleChange = (event) => {
     let dataInput = this.state.loginDetails;
 
@@ -75,7 +77,7 @@ export default class Login extends Component {
     });
   };
 
-  // add the login details (isLogged, userID, isAdmin) to the local storage 
+  // add the login details (isLogged, userID, isAdmin) to the local storage
   LoggedIn = () => {
     let LoginState = true;
     let iduser = "";
@@ -96,13 +98,13 @@ export default class Login extends Component {
     iduser = this.state.userId;
     localStorage.setItem("id", JSON.stringify(iduser));
     console.log(JSON.parse(localStorage.getItem("id")));
-    
+
     this.props.isLogged();
 
     if (this.state.isAdmin) {
-      window.location.href = "http://localhost:3000/Admin";
+      return <Redirect to="/Admin/" />;
     } else {
-      window.location.href = "http://localhost:3000/Home";
+      return <Redirect to="/Home/" />;
     }
   };
 
