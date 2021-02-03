@@ -49,6 +49,7 @@ export default class Admin extends React.Component {
    otherwise it will show an error because these two fields are required in the model  */
   validate() {
     let input = this.state.input;
+    console.log(input);
     let errors = {};
     let isValid = true;
     if (!input["clincName"]) {
