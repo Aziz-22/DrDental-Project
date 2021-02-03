@@ -47,38 +47,41 @@ export default class Admin extends React.Component {
 
   /* Validation for adding new clinic check if the clinic name and service type is entered 
    otherwise it will show an error because these two fields are required in the model  */
-  validate() {
+  validate(type) {
     let input = this.state.input;
     console.log(input);
     let errors = {};
     let isValid = true;
-    if (!input["clincName"]) {
-      isValid = false;
-      errors["clincName"] = "Please enter your Clinic Name.";
-    }
-    if (!input["serviceType"]) {
-      isValid = false;
-      errors["serviceType"] = "Please enter your Services.";
-    }
-    if (!input["clinicImage"]) {
-      input["clinicImage"] =
-        "https://e7.pngegg.com/pngimages/574/699/png-clipart-medicine-pharmacy-consultant-pharmacist-clinic-icon-scanner-heart-cartoon-thumbnail.png";
-    }
-    if (!input["firstName"]) {
-      isValid = false;
-      errors["firstName"] = "Please enter your first Name.";
-    }
-    if (!input["lastName"]) {
-      isValid = false;
-      errors["lastName"] = "Please enter your last Name.";
-    }
-    if (!input["email"]) {
-      isValid = false;
-      errors["email"] = "Please enter your email.";
-    }
-    if (!input["password"]) {
-      isValid = false;
-      errors["password"] = "Please enter your password.";
+    if (type === "clinc") {
+      if (!input["clincName"]) {
+        isValid = false;
+        errors["clincName"] = "Please enter your Clinic Name.";
+      }
+      if (!input["serviceType"]) {
+        isValid = false;
+        errors["serviceType"] = "Please enter your Services.";
+      }
+      if (!input["clinicImage"]) {
+        input["clinicImage"] =
+          "https://e7.pngegg.com/pngimages/574/699/png-clipart-medicine-pharmacy-consultant-pharmacist-clinic-icon-scanner-heart-cartoon-thumbnail.png";
+      }
+    } else if (type === "user") {
+      if (!input["firstName"]) {
+        isValid = false;
+        errors["firstName"] = "Please enter your first Name.";
+      }
+      if (!input["lastName"]) {
+        isValid = false;
+        errors["lastName"] = "Please enter your last Name.";
+      }
+      if (!input["email"]) {
+        isValid = false;
+        errors["email"] = "Please enter your email.";
+      }
+      if (!input["password"]) {
+        isValid = false;
+        errors["password"] = "Please enter your password.";
+      }
     }
     this.setState({
       errors: errors,
@@ -91,7 +94,7 @@ export default class Admin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log("here");
-    if (this.validate()) {
+    if (this.validate("clinic")) {
       console.log("here2");
       const newClinic = this.state.input;
       console.log(newClinic);
@@ -136,7 +139,7 @@ export default class Admin extends React.Component {
   };
   adduser = (event) => {
     event.preventDefault();
-    if (this.validate()) {
+    if (this.validate("user")) {
       const userinfo = this.state.input;
       userSignUp(userinfo)
         .then((res) => {
