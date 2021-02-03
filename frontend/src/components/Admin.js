@@ -95,7 +95,7 @@ export default class Admin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log("here");
-    if (this.validate("clinic")) {
+    if (this.validate("clinc")) {
       console.log("here2");
       const newClinic = this.state.input;
       console.log(newClinic);
