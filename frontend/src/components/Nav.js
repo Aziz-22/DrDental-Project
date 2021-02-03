@@ -155,17 +155,17 @@ class Nav extends Component {
           </nav>
 
           <Switch>
-            <Route path="/" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route
               path="/Login"
               component={() => <Login isLogged={this.isLogged} />}
             />
-            <Route path="/SignUp" component={Signup} />
+            <Route exact path="/SignUp" component={Signup} />
 
-            <Route path="/Admin" component={Admin} />
+            <Route exact path="/Admin" component={Admin} />
 
-            <Route path="/Admin" component={Admin} />
             <Route
+              exact
               path="/Clinics"
               component={() => (
                 <Clinics
@@ -175,6 +175,7 @@ class Nav extends Component {
               )}
             />
             <Route
+              exact
               path="/Profile"
               component={() => (
                 <Profile
@@ -184,6 +185,7 @@ class Nav extends Component {
               )}
             />
             <Route
+              exact
               path="/Appointment"
               component={() => (
                 <Appointment
