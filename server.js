@@ -82,7 +82,6 @@ app.use("/api/user", userRouter);
 // const PORT = process.env.PORT || 5000;
 
 //must change your port to this for deployment else it wont work
-const PORT = process.env.PORT;
 
 //serves all our static files from the build directory.
 app.use(express.static(path.join(__dirname, "build")));
