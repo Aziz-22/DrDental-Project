@@ -44,39 +44,9 @@ export default class Admin extends React.Component {
     });
   }
 
-  // Add new clinic (the new clinics from the state input) to the database (Clinics Model)
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log("here");
-    if (this.validate()) {
-      console.log("here2");
-      const newClinic = this.state.input;
-      console.log(newClinic);
-      AddNewClinic(newClinic)
-        .then((res) => {
-          console.log("res");
-          console.log(res);
-          console.log(res.data);
-          alert("Clinic created successfully.");
-          const newClinicsList = this.state.clinics.filter((clinic) => {
-            return clinic;
-          });
-
-          console.log(newClinicsList.push(newClinic));
-          this.setState({ clinics: newClinicsList });
-          window.$("#exampleModal").modal("toggle");
-          $("#exampleModal").find("input,select").val("").end();
-        })
-
-        .catch((err) => {
-          console.log("ERR: ", err);
-        });
-    }
-  }
-
   /* Validation for adding new clinic check if the clinic name and service type is entered 
    otherwise it will show an error because these two fields are required in the model  */
-  validate() {
+  validate = () => {
     let input = this.state.input;
     let errors = {};
     let isValid = true;
@@ -113,6 +83,36 @@ export default class Admin extends React.Component {
     });
     console.log(isValid);
     return isValid;
+  };
+
+  // Add new clinic (the new clinics from the state input) to the database (Clinics Model)
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log("here");
+    if (this.validate()) {
+      console.log("here2");
+      const newClinic = this.state.input;
+      console.log(newClinic);
+      AddNewClinic(newClinic)
+        .then((res) => {
+          console.log("res");
+          console.log(res);
+          console.log(res.data);
+          alert("Clinic created successfully.");
+          const newClinicsList = this.state.clinics.filter((clinic) => {
+            return clinic;
+          });
+
+          console.log(newClinicsList.push(newClinic));
+          this.setState({ clinics: newClinicsList });
+          window.$("#exampleModal").modal("toggle");
+          $("#exampleModal").find("input,select").val("").end();
+        })
+
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
   }
 
   // Deleteing clinic from the database by admin
