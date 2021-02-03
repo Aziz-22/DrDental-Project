@@ -69,7 +69,7 @@ export default class Clinics extends Component {
         ...this.state,
         check: true,
       });
-    }, 1000);
+    }, 500);
     this.setState({ clinicId: clinicId });
   };
 
