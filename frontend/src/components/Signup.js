@@ -10,6 +10,7 @@ export default class Signup extends Component {
       // the input fileds value
       input: {},
       error: "", // This For Error in the validation func
+      redirect: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,7 +62,10 @@ export default class Signup extends Component {
           // alert("New Account created successfully.");
 
           //Redirect To the Login Page
-          return <Redirect to="/Login" />;
+          this.setState({
+            ...this.state,
+            redirect: "/Login",
+          });
         })
         .catch((err) => {
           console.log("ERR: ", err);
@@ -85,6 +89,10 @@ export default class Signup extends Component {
     });
   };
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+
     return (
       <div className="container">
         <div
