@@ -111,7 +111,7 @@ export default class Login extends Component {
     } else {
       this.setState({
         ...this.state,
-        redirect: "/Home",
+        redirect: "/",
       });
     }
   };

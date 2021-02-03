@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import { getAllClinics, AddNewClinic, deleteClinicByID, userSignUp } from "../api";
+import {
+  getAllClinics,
+  AddNewClinic,
+  deleteClinicByID,
+  userSignUp,
+} from "../api";
 import OneClinicAdmin from "./oneClinicAdmin";
-import $ from 'jquery';
+import $ from "jquery";
 
 export default class Admin extends React.Component {
   constructor(props) {
@@ -42,6 +47,7 @@ export default class Admin extends React.Component {
   // Add new clinic (the new clinics from the state input) to the database (Clinics Model)
   handleSubmit(event) {
     event.preventDefault();
+    console.log("here");
     if (this.validate()) {
       const newClinic = this.state.input;
       console.log(newClinic);
@@ -57,9 +63,8 @@ export default class Admin extends React.Component {
 
           console.log(newClinicsList.push(newClinic));
           this.setState({ clinics: newClinicsList });
-          window.$('#exampleModal').modal('toggle');
-          $('#exampleModal').find("input,select").val('').end();
-
+          window.$("#exampleModal").modal("toggle");
+          $("#exampleModal").find("input,select").val("").end();
         })
 
         .catch((err) => {
@@ -119,7 +124,7 @@ export default class Admin extends React.Component {
         });
         console.log(newClinicsList);
         this.setState({ clinics: newClinicsList });
-        $('#exampleModal').find("input,select").val('').end();
+        $("#exampleModal").find("input,select").val("").end();
       })
       .catch((err) => {
         console.log("ERR: ", err);
@@ -127,28 +132,24 @@ export default class Admin extends React.Component {
   };
   adduser = (event) => {
     event.preventDefault();
-    if(this.validate()){
-     const userinfo = this.state.input
-     userSignUp(userinfo)
-      .then((res) => {
-        console.log("res");
-        console.log(res);
-        console.log(res.data);
-        alert("User created successfully.");
+    if (this.validate()) {
+      const userinfo = this.state.input;
+      userSignUp(userinfo)
+        .then((res) => {
+          console.log("res");
+          console.log(res);
+          console.log(res.data);
+          alert("User created successfully.");
 
-        window.$('#exampleModalCenter').modal('toggle');
-        $('#exampleModalCenter').find("input,select").val('').end();
+          window.$("#exampleModalCenter").modal("toggle");
+          $("#exampleModalCenter").find("input,select").val("").end();
+        })
 
-
-      })
-
-
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
     }
-
-  }
+  };
   render() {
     const allClinics = this.state.clinics.map((clinic, index) => {
       return (
@@ -180,8 +181,13 @@ export default class Admin extends React.Component {
           >
             Add New Clinic
           </button>
-          <br/>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
+          <br />
+          <button
+            type="button"
+            class="btn btn-info"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+          >
             Add New User
           </button>
         </div>
@@ -312,12 +318,26 @@ export default class Admin extends React.Component {
             </div>
           </div>
         </div>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="exampleModalCenter"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add A New User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  Add A New User
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -335,8 +355,8 @@ export default class Admin extends React.Component {
                       onChange={this.handleChange}
                     />
                     <div className="text-danger">
-                        {this.state.errors.firstName}
-                      </div>
+                      {this.state.errors.firstName}
+                    </div>
                     <label for="InputLastName">Last Name</label>
                     <input
                       type="text"
@@ -348,8 +368,8 @@ export default class Admin extends React.Component {
                       onChange={this.handleChange}
                     />
                     <div className="text-danger">
-                        {this.state.errors.lastName}
-                      </div>
+                      {this.state.errors.lastName}
+                    </div>
 
                     <label for="exampleInputEmail1">Email address</label>
                     <input
@@ -361,9 +381,7 @@ export default class Admin extends React.Component {
                       name="email"
                       onChange={this.handleChange}
                     />
-                    <div className="text-danger">
-                        {this.state.errors.email}
-                      </div>
+                    <div className="text-danger">{this.state.errors.email}</div>
                     <label for="Phone">Phone Number</label>
                     <input
                       type="number"
@@ -384,16 +402,23 @@ export default class Admin extends React.Component {
                       onChange={this.handleChange}
                     />
                     <div className="text-danger">
-                        {this.state.errors.password}
-                      </div>
+                      {this.state.errors.password}
+                    </div>
                   </div>
                   <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info" >Create A New User</button>
-              </div>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-info">
+                      Create A New User
+                    </button>
+                  </div>
                 </form>
               </div>
-              
             </div>
           </div>
         </div>
