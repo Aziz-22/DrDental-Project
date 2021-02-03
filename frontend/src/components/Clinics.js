@@ -19,6 +19,7 @@ export default class Clinics extends Component {
       newAppointment: {},
       // The clinic ID we need it when adding new appointment
       clinicId: "",
+      check: false,
     };
   }
 
@@ -63,6 +64,12 @@ export default class Clinics extends Component {
   /* Get the clinic ID so when adding new appointment it will be 
   added to the table of appointment and we can get the name of the clinic  */
   GetclinicId = (clinicId) => {
+    setInterval(() => {
+      this.setState({
+        ...this.state,
+        check: true,
+      });
+    }, 50);
     this.setState({ clinicId: clinicId });
   };
 
@@ -141,25 +148,27 @@ export default class Clinics extends Component {
 
                       {/* Modal for displaing the times for appointment  */}
                       <div class="modal-body" id="modal">
-                        <AvailableTimes
-                          weekStartsOn="sunday"
-                          onChange={(selections) => {
-                            selections.forEach(({ start, end }) => {
-                              this.setState({ date: start });
-                              console.log("Start:", start, "End:", end);
-                            });
-                          }}
-                          height={400}
-                          recurring={false}
-                          availableDays={[
-                            "sunday",
-                            "monday",
-                            "tuesday",
-                            "wednesday",
-                            "thursday",
-                          ]}
-                          availableHourRange={{ start: 9, end: 19 }}
-                        />
+                        {this.state.check ? (
+                          <AvailableTimes
+                            weekStartsOn="sunday"
+                            onChange={(selections) => {
+                              selections.forEach(({ start, end }) => {
+                                this.setState({ date: start });
+                                console.log("Start:", start, "End:", end);
+                              });
+                            }}
+                            height={400}
+                            recurring={false}
+                            availableDays={[
+                              "sunday",
+                              "monday",
+                              "tuesday",
+                              "wednesday",
+                              "thursday",
+                            ]}
+                            availableHourRange={{ start: 9, end: 19 }}
+                          />
+                        ) : null}
                       </div>
                       <div class="modal-footer">
                         <button
