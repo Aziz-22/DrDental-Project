@@ -6,6 +6,7 @@ import {
   userSignUp,
 } from "../api";
 import OneClinicAdmin from "./oneClinicAdmin";
+import swal from "sweetalert";
 import $ from "jquery";
 
 export default class Admin extends React.Component {
@@ -103,7 +104,7 @@ export default class Admin extends React.Component {
           console.log("res");
           console.log(res);
           console.log(res.data);
-          alert("Clinic created successfully.");
+          swal("Created!", "Clinic created successfully!", "success");
           const newClinicsList = this.state.clinics.filter((clinic) => {
             return clinic;
           });
@@ -146,8 +147,7 @@ export default class Admin extends React.Component {
           console.log("res");
           console.log(res);
           console.log(res.data);
-          alert("User created successfully.");
-
+          swal("Created!", "User created successfully!", "success");
           window.$("#exampleModalCenter").modal("toggle");
           $("#exampleModalCenter").find("input,select").val("").end();
         })

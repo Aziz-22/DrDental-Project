@@ -64,9 +64,10 @@ div.col {
   padding-left: 15%;
 }
 
-/* .table {
-  text-align: center;
-} */
+.swal-button {
+  background-color: #17a2b8;
+  border: 1px solid #4962b3;
+}
 
 /* Abdulaziz & Shahad CSS */
 
@@ -83,8 +84,6 @@ div.col {
 .logedinIcon {
   width: 50px;
 }
-
-
 
 .social-icons {
   display: flex;
@@ -194,8 +193,6 @@ div.col {
   justify-content: space-around;
 }
 .btn {
-
-
   margin-bottom: 20px;
 }
 .Info {
