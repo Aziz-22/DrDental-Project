@@ -5,11 +5,14 @@ const cors = require("cors");
 require("dotenv").config();
 
 //Make sure to add to your whitelist any website or APIs that connect to your backend.
-var whitelist = [`http://localhost:${PORT}`, "http://example2.com"];
+var whitelist = [
+  `http://localhost:${PORT}`,
+  "https://drdentalclinics.herokuapp.com/",
+];
 
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       var message =
@@ -96,17 +99,6 @@ app.listen(PORT);
 app.listen(PORT, () => {
   console.log(`BLOGY => http://localhost:${PORT}`);
 });
-
-/*
-  C.R.U.D - Actions Table
-
-  Create          CREATE
-  Read
-    Read All      INDEX
-    Read By ID    SHOW
-  Update          UPDATE
-  Delete          DESTROY
-*/
 
 app.listen(PORT, () => {
   console.log(`✅ PORT: ${PORT} 🌟`);
