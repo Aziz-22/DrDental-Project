@@ -22,7 +22,7 @@ class Nav extends Component {
     };
   }
 
-  // will excute when the user is logged 
+  // will excute when the user is logged
   isLogged = () => {
     console.log(localStorage.getItem("id"));
     console.log(localStorage.getItem("loggedin"));
@@ -67,8 +67,8 @@ class Nav extends Component {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <Link to="/Home">
-                    <a className="nav-link" href="/Home">
+                  <Link to="/">
+                    <a className="nav-link" href="/">
                       Home <span className="sr-only"></span>
                     </a>
                   </Link>
@@ -98,15 +98,12 @@ class Nav extends Component {
 
                   {this.state.isAdmin ? (
                     <div className="dropdown-menu">
-                       <Link to="/Admin">
-                       <a
-                          className="dropdown-item"
-                          href=""
-                        >
-                         Admin Panel
-                         </a>
-                       </Link>
-                      <Link to="/Home">
+                      <Link to="/Admin">
+                        <a className="dropdown-item" href="">
+                          Admin Panel
+                        </a>
+                      </Link>
+                      <Link to="/">
                         <a
                           className="dropdown-item"
                           href=""
@@ -128,7 +125,7 @@ class Nav extends Component {
                           Appointment
                         </a>
                       </Link>
-                      <Link to="/Home">
+                      <Link to="/">
                         <a
                           className="dropdown-item"
                           href=""
@@ -158,7 +155,7 @@ class Nav extends Component {
           </nav>
 
           <Switch>
-            <Route path="/Home" component={Home} />
+            <Route path="/" component={Home} />
             <Route
               path="/Login"
               component={() => <Login isLogged={this.isLogged} />}
