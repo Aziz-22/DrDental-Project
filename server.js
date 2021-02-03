@@ -2,10 +2,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
+//Make sure to add to your whitelist any website or APIs that connect to your backend.
+var whitelist = [`http://localhost:${PORT}`, "http://example2.com"];
 
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      var message =
+        "The CORS policy for this application does not allow access from origin " +
+        origin;
+      callback(new Error(message), false);
+    }
+  },
+};
 
-// Clinics Router 
+const path = require("path");
+
+const PORT = process.env.PORT || 3001;
+
+// Clinics Router
 const clinicRouter = require("./routes/Clinics");
 
 // User Appointment Router
@@ -18,7 +37,7 @@ const userRouter = require("./routes/User");
 const db_url = require("./db");
 
 // Establish Database Connection
-mongoose.connect(db_url, { useNewUrlParser: true });
+mongoose.connect(process.env.mongoDBURL, { useNewUrlParser: true });
 mongoose.connection.once("open", () => {
   console.log("Connected to Mongo");
 });
@@ -43,16 +62,14 @@ app.use(express.json());
 
 const reactPort = 3000;
 // Set CORS headers on response from this API using the `cors` NPM package.
-app.use(
-  cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${reactPort}` })
-);
+app.use(cors(corsOptions));
 
 /*** Routes ***/
 
 // Mount imported Routers
-app.use(clinicRouter);
-app.use(userAppointmentRouter);
-app.use(userRouter);
+app.use("/api/clinic", clinicRouter);
+app.use("/api/userAppointment", userAppointmentRouter);
+app.use("/api/user", userRouter);
 
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);
@@ -60,6 +77,20 @@ app.use(userRouter);
 /*** Routes ***/
 // Define PORT for the API to run on
 const PORT = process.env.PORT || 5000;
+
+//must change your port to this for deployment else it wont work
+const PORT = process.env.PORT;
+
+//serves all our static files from the build directory.
+app.use(express.static(path.join(__dirname, "build")));
+
+// After all routes
+// This code essentially serves the index.html file on any unknown routes.
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.listen(PORT);
 
 // Start the server to listen for requests on a given port
 app.listen(PORT, () => {
@@ -76,3 +107,7 @@ app.listen(PORT, () => {
   Update          UPDATE
   Delete          DESTROY
 */
+
+app.listen(PORT, () => {
+  console.log(`✅ PORT: ${PORT} 🌟`);
+});
