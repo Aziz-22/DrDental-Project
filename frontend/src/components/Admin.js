@@ -19,6 +19,7 @@ export default class Admin extends React.Component {
       // The errors for the validation when adding clinic
       errors: {},
     };
+    this.validate = this.validate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
