@@ -13,7 +13,7 @@ export default class App extends Component {
       <Router>
         <div className="mainDiv">
           <Nav />
-          <hr />
+      
         </div>
       </Router>
     );

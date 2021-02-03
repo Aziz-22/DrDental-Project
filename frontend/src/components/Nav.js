@@ -4,39 +4,53 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
 import Clinics from "./Clinics";
-import Contactus from "./Contactus";
 import Appointment from "./Appointment";
 import Profile from "./Profile";
 import Admin from "./Admin";
-
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
+
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogged: false,
-      userId: "",
+      // get the data if the user is logged or not from local storage
+      isLogged: JSON.parse(localStorage.getItem("loggedin")),
+      // get the user ID from local storage
+      userId: JSON.parse(localStorage.getItem("id")),
+      // get the data if the user is Admin or not from local storage
+      isAdmin: JSON.parse(localStorage.getItem("admin")),
     };
   }
-  isLogged = (isLogged, userId) => {
-    this.setState({ isLogged: isLogged, userId: userId });
-    console.log(isLogged, userId);
+
+  // will excute when the user is logged 
+  isLogged = () => {
+    console.log(localStorage.getItem("id"));
+    console.log(localStorage.getItem("loggedin"));
+    console.log(this.state.isLogged, this.state.userId);
+    this.setState({
+      isLogged: JSON.parse(localStorage.getItem("loggedin")),
+      userId: JSON.parse(localStorage.getItem("id")),
+      isAdmin: JSON.parse(localStorage.getItem("admin")),
+    });
   };
+
+  // if the user clicked logout this function will clear the local storage
   LoggedOut = () => {
     console.log("Logout");
+    localStorage.clear();
     this.setState({ isLogged: false });
   };
+
   render() {
     return (
       <Router>
         <div className="Nav">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-              Dr.Dental
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="">
+              <img src="https://i.imgur.com/NF0AUHu.png" width="70%"></img>
             </a>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
@@ -44,76 +58,98 @@ class Nav extends Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
                   <Link to="/Home">
-                    <a class="nav-link" href="">
-                      Home <span class="sr-only"></span>
+                    <a className="nav-link" href="/Home">
+                      Home <span className="sr-only"></span>
                     </a>
                   </Link>
                 </li>
 
-                <li class="nav-item active">
+                <li className="nav-item active">
                   <Link to="/Clinics">
-                    <a class="nav-link" href="">
-                      Clinics <span class="sr-only"></span>
-                    </a>
-                  </Link>
-                </li>
-
-                <li class="nav-item active">
-                  <Link to="/Contactus">
-                    <a class="nav-link" href="">
-                      Contact Us <span class="sr-only"></span>
+                    <a className="nav-link" href="">
+                      Clinics <span className="sr-only"></span>
                     </a>
                   </Link>
                 </li>
               </ul>
 
               {this.state.isLogged ? (
-                <div class="btn-group dropleft">
+                <div className="btn-group dropleft">
                   <button
-                    className="logedinIcon"
+                    className="logedinIcon profileIcon"
                     type="button"
-                    class="btn btn-info dropdown-toggle"
+                    className="btn btn-info dropdown-toggle"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
                     <span className={`material-icons`}>account_circle</span>
                   </button>
-                  <div class="dropdown-menu">
-                    <Link to="/Profile">
-                      <a class="dropdown-item" href="#">
-                        Profile
-                      </a>
-                    </Link>
-                    <Link to="/Appointment">
-                      <a class="dropdown-item" href="#">
-                        Appointment
-                      </a>
-                    </Link>
-                    <Link to="/Home">
-                      <a class="dropdown-item" href="" onClick={this.LoggedOut}>
-                        Logout <span class="sr-only"></span>
-                      </a>
-                    </Link>
-                  </div>
+
+                  {this.state.isAdmin ? (
+                    <div className="dropdown-menu">
+                       <Link to="/Admin">
+                       <a
+                          className="dropdown-item"
+                          href=""
+                        >
+                         Admin Panel
+                         </a>
+                       </Link>
+                      <Link to="/Home">
+                        <a
+                          className="dropdown-item"
+                          href=""
+                          onClick={this.LoggedOut}
+                        >
+                          Logout <span className="sr-only"></span>
+                        </a>
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="dropdown-menu ">
+                      <Link to="/Profile">
+                        <a className="dropdown-item" href="#">
+                          Profile
+                        </a>
+                      </Link>
+                      <Link to="/Appointment">
+                        <a className="dropdown-item" href="#">
+                          Appointment
+                        </a>
+                      </Link>
+                      <Link to="/Home">
+                        <a
+                          className="dropdown-item"
+                          href=""
+                          onClick={this.LoggedOut}
+                        >
+                          Logout <span className="sr-only"></span>
+                        </a>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <form class="form-inline my-2 my-lg-0">
+                <form className="form-inline my-2 my-lg-0">
                   <Link to="/Login">
-                    <a class="nav-link" href="">
-                      Login <span class="sr-only"></span>
+                    <a className="nav-link" href="">
+                      Login <span className="sr-only"></span>
                     </a>
                   </Link>
                   <Link to="/SignUp">
-                    <a class="nav-link" href="">
-                      Sign Up <span class="sr-only"></span>
+                    <a className="nav-link" href="">
+                      Sign Up <span className="sr-only"></span>
                     </a>
                   </Link>
                 </form>
@@ -128,7 +164,9 @@ class Nav extends Component {
               component={() => <Login isLogged={this.isLogged} />}
             />
             <Route path="/SignUp" component={Signup} />
-            <Route path="/Contactus" component={Contactus} />
+
+            <Route path="/Admin" component={Admin} />
+
             <Route path="/Admin" component={Admin} />
             <Route
               path="/Clinics"

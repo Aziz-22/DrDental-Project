@@ -6,7 +6,7 @@ const UsersSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   phone: { type: Number },
   email: { type: String, required: true },
-  userImage: { type: String },
+  userImage: { type: String,default:"https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png" },
   isAdmin: { type: Boolean, default: false},
   password: { type: String, required: true },
 });

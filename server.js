@@ -3,25 +3,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Require Route Files
-const indexRouter = require("./routes/index");
-// const articlesRouter = require("./routes/articles");
-const adminRouter = require("./routes/Admin");
 
-// Sign Up Router
-const signUpRouter = require("./routes/SignUp_Back");
 
-// Login Router
-const loginRouter = require("./routes/Login_Back");
-
-// Reserve_Appointment Router
-const Reserve_AppointmentRouter = require("./routes/Reserve_Appointment");
-
-// User profile Router
-const userProfile = require("./routes/Profile");
+// Clinics Router 
+const clinicRouter = require("./routes/Clinics");
 
 // User Appointment Router
-const userAppointment = require("./routes/Appointments");
+const userAppointmentRouter = require("./routes/Appointments");
+
+// User Router
+const userRouter = require("./routes/User");
 
 // Require DB Configuration File
 const db_url = require("./db");
@@ -59,13 +50,9 @@ app.use(
 /*** Routes ***/
 
 // Mount imported Routers
-app.use(indexRouter);
-app.use(adminRouter);
-app.use(signUpRouter);
-app.use(loginRouter);
-app.use(Reserve_AppointmentRouter);
-app.use(userProfile);
-app.use(userAppointment);
+app.use(clinicRouter);
+app.use(userAppointmentRouter);
+app.use(userRouter);
 
 // app.use('/',indexRouter);
 // app.use('/articles',articlesRouter);

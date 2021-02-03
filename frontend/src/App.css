@@ -14,6 +14,14 @@ td {
   padding-right: 10px;
 }
 
+.modal-lg {
+  width: 1400px;
+}
+.navbar-light .navbar-brand {
+  margin-right: -30px;
+  width: 140px;
+}
+
 /* Abdulelah & Afnan CSS */
 
 .card {
@@ -38,7 +46,8 @@ div.col-sm-4 {
 }
 
 #profileBox {
-  border: 1px solid;
+  border: 1px;
+  border-radius: 5px;
   padding: 10px;
   box-shadow: 5px 5px 5px;
   margin: 50px 50px 50px;
@@ -49,6 +58,7 @@ div.col-sm-4 {
   margin-left: 80px;
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
 }
 div.col {
   padding-left: 15%;
@@ -60,6 +70,10 @@ div.col {
 
 /* Abdulaziz & Shahad CSS */
 
+.bg-light {
+  background-color: #f8f9fa !important;
+  margin-top: -25px;
+}
 .Nav-Links {
   margin-top: 40px;
 }
@@ -69,6 +83,133 @@ div.col {
 .logedinIcon {
   width: 50px;
 }
-.modal-lg{
-  width: 1400px
+
+
+
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+}
+.carousel-item {
+  height: 600px;
+}
+.social-icons {
+  max-width: 1000px;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+}
+
+/* END Abdulaziz & Shahad CSS */
+
+.dropleft .dropdown-toggle::before {
+  vertical-align: super !important;
+}
+.modal-lg {
+  width: 1400px;
+}
+
+.carousel-item {
+  height: 600px;
+  position: relative;
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 150px;
+  left: 150px;
+  font-size: 4vw;
+  color: darkcyan;
+}
+.overlay-text-P-about-us {
+  position: absolute;
+  bottom: 50px;
+  left: 150px;
+  font-size: 1.5vw;
+  color: black;
+}
+
+.social-icons {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+}
+.Social-Icon {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 240px;
+  list-style: none;
+}
+
+.website-rights {
+  color: white !important;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.Services {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.our-services {
+  text-align: center;
+  color: darkcyan;
+  margin-top: 50px;
+}
+
+#Service-One {
+  text-align: center;
+}
+#Service-One:hover {
+  color: darkcyan;
+}
+
+#Service-Two {
+  text-align: center;
+}
+#Service-Two:hover {
+  color: darkcyan;
+}
+#Service-Three {
+  text-align: center;
+}
+
+#Service-Three:hover {
+  color: darkcyan;
+}
+
+.Cards {
+  display: flex;
+  justify-content: space-around;
+}
+.btn {
+
+
+  margin-bottom: 20px;
+}
+.Info {
+  text-align: left;
+  display: grid;
+  margin-bottom: 20px;
+  color: snow;
+}
+.contact-us {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-lg {
+  width: 1400px;
 }

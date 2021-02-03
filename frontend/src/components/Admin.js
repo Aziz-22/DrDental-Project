@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { getAllClinics, AddNewClinic, deleteClinicByID } from "../api";
 import OneClinicAdmin from "./oneClinicAdmin";
+import $ from 'jquery';
 
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // All clinics from the database
       clinics: [],
+      // The input value entered by admin when adding clinic
       input: {},
+      // The errors for the validation when adding clinic
       errors: {},
-     
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
+    // getting all clinics from the database (backend - routers) and save it in the state (clinics)
     getAllClinics()
       .then((response) => {
         console.log("RESPONSE: ", response);
@@ -27,6 +30,7 @@ export default class Admin extends React.Component {
       });
   }
 
+  // Get the input from the form when adding new clinic by admin and save it in the state (input)
   handleChange(event) {
     let input = this.state.input;
     input[event.target.name] = event.target.value;
@@ -34,6 +38,8 @@ export default class Admin extends React.Component {
       input,
     });
   }
+
+  // Add new clinic (the new clinics from the state input) to the database (Clinics Model)
   handleSubmit(event) {
     event.preventDefault();
     if (this.validate()) {
@@ -48,9 +54,12 @@ export default class Admin extends React.Component {
           const newClinicsList = this.state.clinics.filter((clinic) => {
             return clinic;
           });
-         
+
           console.log(newClinicsList.push(newClinic));
-          this.setState({clinics:newClinicsList})
+          this.setState({ clinics: newClinicsList });
+          window.$('#exampleModal').modal('toggle'); 
+          $('#exampleModal').find("input,select").val('').end();
+          
         })
 
         .catch((err) => {
@@ -59,6 +68,8 @@ export default class Admin extends React.Component {
     }
   }
 
+  /* Validation for adding new clinic check if the clinic name and service type is entered 
+   otherwise it will show an error because these two fields are required in the model  */
   validate() {
     let input = this.state.input;
     let errors = {};
@@ -81,8 +92,8 @@ export default class Admin extends React.Component {
     return isValid;
   }
 
+  // Deleteing clinic from the database by admin
   deleteClinic = (id) => {
-    
     deleteClinicByID(id)
       .then((res) => {
         console.log(`The Article with the ID ${id} has been deleted.`);
@@ -91,21 +102,18 @@ export default class Admin extends React.Component {
           return clinic._id !== id;
         });
         console.log(newClinicsList);
-        this.funcSetClinics(newClinicsList);
+        this.setState({ clinics: newClinicsList });
+        $('#exampleModal').find("input,select").val('').end();
       })
       .catch((err) => {
         console.log("ERR: ", err);
       });
   };
 
-  funcSetClinics = (newClinics) => {
-    this.setState({ clinics: newClinics });
-  };
-
-
   render() {
     const allClinics = this.state.clinics.map((clinic, index) => {
       return (
+        // Display the table (table for displaying all clinics) row in another component
         <OneClinicAdmin
           Name={clinic.clincName}
           Service={clinic.serviceType}
@@ -116,14 +124,14 @@ export default class Admin extends React.Component {
           IdNumber={index + 1}
           Image={clinic.clinicImage}
           location={clinic.locationId}
-          clinics={this.state.clinics}
           updatedAt={clinic.updatedAt}
         />
       );
     });
     return (
       <div>
-        {/* <!-- Button trigger modal --> */}
+        <br/>
+        {/* <!-- Button trigger modal for adding new clinic --> */}
         <div class="col-md-12 text-center">
           <button
             type="button"
@@ -135,7 +143,8 @@ export default class Admin extends React.Component {
           </button>
         </div>
         <hr></hr>
-        <table className="table">
+        <div className="mr-4">
+        <table className="table ml-4">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -143,14 +152,13 @@ export default class Admin extends React.Component {
               <th scope="col">Services</th>
               <th scope="col">Rating</th>
               <th scope="col">Image</th>
-              {/* <th scope="col">Location</th> */}
               <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
           {allClinics}
         </table>
-
-        {/* <!-- Modal --> */}
+        </div>
+        {/* <!-- Modal for adding new clinic --> */}
         <div
           class="modal fade"
           id="exampleModal"
@@ -159,7 +167,7 @@ export default class Admin extends React.Component {
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document" id="modalContent">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -241,16 +249,8 @@ export default class Admin extends React.Component {
                         <option value="4">4</option>
                         <option value="5">5</option>
                       </select>
-                      {/* <input
-                className="form-control"
-                placeholder="Enter email"
-                name="rating"
-               
-              /> */}
                     </div>
-                    {/* <button type="submit" className="btn btn-primary">
-              Submit
-            </button> */}
+
                     <div class="modal-footer">
                       <button
                         type="button"

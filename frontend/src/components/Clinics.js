@@ -3,24 +3,27 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import { getAllClinics, AddNewAppointment } from "../api";
-import moment from "moment";
-import ReactTimeslotCalendar from "react-timeslot-calendar";
 import AvailableTimes from "react-available-times";
+import $ from 'jquery';
 
 export default class Clinics extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // All clinics from the database
       allClinics: [],
-      date: "",
+      // The date that the user entered to book appointment
+      date: new Date(),
+      // The new appointment the user booked (entered)
       newAppointment: {},
-      allAppointment: [],
+      // The clinic ID we need it when adding new appointment
       clinicId: "",
     };
   }
+
   componentDidMount() {
+    // get all clinics from the database
     getAllClinics()
       .then((response) => {
         console.log("RESPONSE: ", response);
@@ -32,12 +35,15 @@ export default class Clinics extends Component {
       });
   }
 
-
-
+  // Add new appointment from the database
   addAppointment = (clinicId) => {
     console.log(clinicId);
     let newAppointment = this.state.newAppointment;
-    newAppointment["date"] = this.state.date;
+    console.log("Date in adding", this.state.date);
+
+    newAppointment["date"] = this.state.date.toLocaleString("en-US", {
+      timeZone: "Etc/GMT-6",
+    });
     newAppointment["patientId"] = this.props.userId;
     newAppointment["clinicId"] = clinicId;
 
@@ -45,17 +51,21 @@ export default class Clinics extends Component {
       .then((response) => {
         console.log("RESPONSE: ", response);
         console.log("DATA: ", response.data);
-        this.setState({ allAppointment: response.data });
+        
+        window.$('#exampleModal').modal('toggle'); 
+        alert("Your appointment is Reserved")
+        
       })
       .catch((err) => {
         console.log("ERR: ", err);
       });
   };
 
-  printclinicId = (clinicId) => {
+  /* Get the clinic ID so when adding new appointment it will be 
+  added to the table of appointment and we can get the name of the clinic  */
+  GetclinicId = (clinicId) => {
     this.setState({ clinicId: clinicId });
   };
-
 
   render() {
     const allClinics = this.state.allClinics;
@@ -65,11 +75,7 @@ export default class Clinics extends Component {
           <Card style={{ width: "18rem" }}>
             <Card.Img
               variant="top"
-              src={
-                clinics.clinicImage
-                  ? clinics.clinicImage
-                  : "https://e7.pngegg.com/pngimages/574/699/png-clipart-medicine-pharmacy-consultant-pharmacist-clinic-icon-scanner-heart-cartoon-thumbnail.png"
-              }
+              src={clinics.clinicImage}
               width="250"
               height="250"
             />
@@ -85,17 +91,29 @@ export default class Clinics extends Component {
                 <Card.Link href={clinics.locationId} target="_blank">
                   Location
                 </Card.Link>
-                <button
-                  type="button"
-                  class="btn btn-info"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={() => {
-                    this.printclinicId(clinics._id);
-                  }}
-                >
-                  Reserve
-                </button>
+                {this.props.isLogged ? (
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={() => {
+                      this.GetclinicId(clinics._id);
+                    }}
+                  >
+                    Reserve
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    onClick={() => {
+                      alert("you have to login :)");
+                    }}
+                  >
+                    Reserve
+                  </button>
+                )}
 
                 <div
                   class="modal fade"
@@ -111,6 +129,7 @@ export default class Clinics extends Component {
                         <h5 class="modal-title" id="exampleModalLabel">
                           Pick a date
                         </h5>
+                        {/* Modal button */}
                         <button
                           type="button"
                           class="close"
@@ -120,17 +139,17 @@ export default class Clinics extends Component {
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">
+
+                      {/* Modal for displaing the times for appointment  */}
+                      <div class="modal-body" id="modal">
                         <AvailableTimes
                           weekStartsOn="sunday"
-                          
                           onChange={(selections) => {
                             selections.forEach(({ start, end }) => {
-                              this.setState({date:start})
+                              this.setState({ date: start });
                               console.log("Start:", start, "End:", end);
                             });
                           }}
-                        
                           height={400}
                           recurring={false}
                           availableDays={[
@@ -158,7 +177,7 @@ export default class Clinics extends Component {
                           }}
                           class="btn btn-primary"
                         >
-                          Save changes
+                          Create
                         </button>
                       </div>
                     </div>
