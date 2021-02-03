@@ -110,6 +110,7 @@ export default class Admin extends React.Component {
     this.setState({
       errors: errors,
     });
+    console.log(isValid);
     return isValid;
   }
 
