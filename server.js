@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 //Make sure to add to your whitelist any website or APIs that connect to your backend.
@@ -22,8 +23,6 @@ var corsOptions = {
     }
   },
 };
-
-const path = require("path");
 
 // const PORT = process.env.PORT || 3001;
 
