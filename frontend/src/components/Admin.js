@@ -20,7 +20,8 @@ export default class Admin extends React.Component {
       errors: {},
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validate = this.validate.bind(this);
   }
   componentDidMount() {
     // getting all clinics from the database (backend - routers) and save it in the state (clinics)
@@ -46,7 +47,7 @@ export default class Admin extends React.Component {
 
   /* Validation for adding new clinic check if the clinic name and service type is entered 
    otherwise it will show an error because these two fields are required in the model  */
-  validatee = () => {
+  validate() {
     let input = this.state.input;
     let errors = {};
     let isValid = true;
@@ -83,13 +84,13 @@ export default class Admin extends React.Component {
     });
     console.log(isValid);
     return isValid;
-  };
+  }
 
   // Add new clinic (the new clinics from the state input) to the database (Clinics Model)
   handleSubmit(event) {
     event.preventDefault();
     console.log("here");
-    if (this.validatee()) {
+    if (this.validate()) {
       console.log("here2");
       const newClinic = this.state.input;
       console.log(newClinic);
@@ -134,7 +135,7 @@ export default class Admin extends React.Component {
   };
   adduser = (event) => {
     event.preventDefault();
-    if (this.validatee()) {
+    if (this.validate()) {
       const userinfo = this.state.input;
       userSignUp(userinfo)
         .then((res) => {
