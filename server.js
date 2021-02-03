@@ -79,12 +79,12 @@ app.use("/api/user", userRouter);
 //must change your port to this for deployment else it wont work
 
 //serves all our static files from the build directory.
-app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.use(express.static(path.join(__dirname, "/build")));
 
 // After all routes
 // This code essentially serves the index.html file on any unknown routes.
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "/build", "index.html"));
 });
 
 app.listen(PORT, () => {
