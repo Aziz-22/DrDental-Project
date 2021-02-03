@@ -76,7 +76,7 @@ app.use("/api/user", userRouter);
 
 /*** Routes ***/
 // Define PORT for the API to run on
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 //must change your port to this for deployment else it wont work
 const PORT = process.env.PORT;
