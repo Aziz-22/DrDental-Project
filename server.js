@@ -92,13 +92,6 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.listen(PORT);
-
-// Start the server to listen for requests on a given port
-app.listen(PORT, () => {
-  console.log(`BLOGY => http://localhost:${PORT}`);
-});
-
 app.listen(PORT, () => {
   console.log(`✅ PORT: ${PORT} 🌟`);
 });
