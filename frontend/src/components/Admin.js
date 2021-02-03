@@ -19,7 +19,6 @@ export default class Admin extends React.Component {
       // The errors for the validation when adding clinic
       errors: {},
     };
-    this.validate = this.validate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -47,7 +46,7 @@ export default class Admin extends React.Component {
 
   /* Validation for adding new clinic check if the clinic name and service type is entered 
    otherwise it will show an error because these two fields are required in the model  */
-  validate = () => {
+  validatee = () => {
     let input = this.state.input;
     let errors = {};
     let isValid = true;
@@ -90,7 +89,7 @@ export default class Admin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log("here");
-    if (this.validate()) {
+    if (this.validatee()) {
       console.log("here2");
       const newClinic = this.state.input;
       console.log(newClinic);
@@ -135,7 +134,7 @@ export default class Admin extends React.Component {
   };
   adduser = (event) => {
     event.preventDefault();
-    if (this.validate()) {
+    if (this.validatee()) {
       const userinfo = this.state.input;
       userSignUp(userinfo)
         .then((res) => {
