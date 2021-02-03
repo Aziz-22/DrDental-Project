@@ -158,7 +158,7 @@ class Nav extends Component {
             <Route exact path="/" component={Home} />
             <Route
               path="/Login"
-              component={() => <Login isLogged={this.isLogged} />}
+              render={() => <Login isLogged={this.isLogged} />}
             />
             <Route exact path="/SignUp" component={Signup} />
 
