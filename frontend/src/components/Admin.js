@@ -49,6 +49,7 @@ export default class Admin extends React.Component {
     event.preventDefault();
     console.log("here");
     if (this.validate()) {
+      console.log("here2");
       const newClinic = this.state.input;
       console.log(newClinic);
       AddNewClinic(newClinic)
@@ -234,11 +235,7 @@ export default class Admin extends React.Component {
               </div>
               <div class="modal-body">
                 <div>
-                  <form
-                    onSubmit={(e) => {
-                      this.handleSubmit(e);
-                    }}
-                  >
+                  <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <h2>Add Clinic</h2>
                       <label className="control-label">Clinic Name</label>
