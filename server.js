@@ -50,11 +50,6 @@ mongoose.connection.once("open", () => {
 // Instantiate Express Application Object
 const app = express();
 
-app.get("/", (req, res) => {
-  console.log("get /");
-  res.json("result");
-});
-
 /*** Middleware ***/
 
 // Add `bodyParser` middleware which will parse JSON requests
