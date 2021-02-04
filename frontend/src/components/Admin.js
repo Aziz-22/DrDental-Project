@@ -200,7 +200,7 @@ export default class Admin extends React.Component {
         </div>
         <hr></hr>
         <div className="mr-4">
-          <table className="table ml-4">
+          <table className="table ml-4 table-hover table-borderless">
             <thead>
               <tr>
                 <th scope="col">#</th>

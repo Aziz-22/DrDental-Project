@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../App.css";
 import { userSignUp } from "../api";
 import { Redirect } from "react-router-dom";
+import swal from "sweetalert";
+
 export default class Signup extends Component {
   constructor(props) {
     super(props);
@@ -88,6 +90,7 @@ export default class Signup extends Component {
   };
   render() {
     if (this.state.redirect) {
+      swal("SignUp successfully!");
       return <Redirect to={this.state.redirect} />;
     }
 
@@ -123,7 +126,8 @@ export default class Signup extends Component {
               <form className="w-50" onSubmit={this.handleSubmit}>
                 <div class="col-md-12">
                   <label style={{ marginTop: "15px" }} for="InputFirstName">
-                    First Name
+                    First Name{" "}
+                    <span style={{ color: "red", verticalAlign: "s" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -135,7 +139,8 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                   />
                   <label style={{ marginTop: "15px" }} for="InputLastName">
-                    Last Name
+                    Last Name{" "}
+                    <span style={{ color: "red", verticalAlign: "s" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -147,7 +152,8 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                   />
                   <label style={{ marginTop: "15px" }} for="exampleInputEmail1">
-                    Email address
+                    Email address{" "}
+                    <span style={{ color: "red", verticalAlign: "s" }}>*</span>
                   </label>
                   <input
                     type="email"
@@ -170,12 +176,12 @@ export default class Signup extends Component {
                     name="phone"
                     onChange={this.handleChange}
                   />
-
                   <label
                     style={{ marginTop: "15px" }}
                     for="exampleInputPassword1"
                   >
-                    Password
+                    Password{" "}
+                    <span style={{ color: "red", verticalAlign: "s" }}>*</span>
                   </label>
                   <input
                     type="password"
@@ -186,7 +192,6 @@ export default class Signup extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-
                 <div style={{ marginTop: "10px" }} class="form-check">
                   <small id="emailHelp" class="form-text text-muted">
                     <span>
@@ -194,8 +199,10 @@ export default class Signup extends Component {
                       <a href="./Login"> Login</a>
                     </span>
                   </small>
+                  <small id="emailHelp" class="form-text text-muted">
+                    <span style={{ color: "red" }}>* Required</span>
+                  </small>
                 </div>
-
                 <div class="col-md-8">
                   <button
                     style={{ marginTop: "10px", marginLeft: "45px" }}

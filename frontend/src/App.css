@@ -61,7 +61,7 @@ div.col-sm-4 {
   align-items: baseline;
 }
 div.col {
-  padding-left: 15%;
+  padding-left: 0%;
 }
 
 .swal-button {
@@ -209,4 +209,73 @@ div.col {
 
 .modal-lg {
   width: 1400px;
+}
+
+/* Abdulaziz New CSS */
+
+@media screen and (max-width: 995px) {
+  .collapse.show {
+    display: block;
+    text-align: right;
+  }
+}
+@media screen and (min-width: 1005px) {
+  .overlay-text {
+    position: absolute !important;
+    bottom: 100px !important;
+    left: 50px !important;
+    font-size: 4vw !important;
+    color: darkcyan !important;
+  }
+  .overlay-text-P-about-us {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50px !important;
+    font-size: 1.5vw !important;
+    color: black !important;
+  }
+  .carousel-item {
+    height: 100% !important;
+    position: relative !important;
+  }
+}
+@media only screen and (max-width: 716px) {
+  .overlay-text {
+    position: absolute !important;
+    bottom: 70px !important;
+    left: 50px !important;
+    font-size: 4vw !important;
+    color: darkcyan !important;
+  }
+  .overlay-text-P-about-us {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50px !important;
+    font-size: 1.5vw !important;
+    color: black !important;
+  }
+  .carousel-item {
+    height: 100% !important;
+    position: relative !important;
+  }
+}
+@media screen and (min-width: 720px) and (max-width: 1000px) {
+  .overlay-text {
+    position: absolute !important;
+    bottom: 70px !important;
+    left: 50px !important;
+    font-size: 4vw !important;
+    color: darkcyan !important;
+  }
+  .overlay-text-P-about-us {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50px !important;
+    font-size: 1.5vw !important;
+    color: black !important;
+  }
+  .carousel-item {
+    height: 100% !important;
+    position: relative !important;
+  }
 }

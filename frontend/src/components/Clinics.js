@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { getAllClinics, AddNewAppointment } from "../api";
 import AvailableTimes from "react-available-times";
+import swal from "sweetalert";
 import $ from "jquery";
 
 export default class Clinics extends Component {
@@ -52,9 +53,8 @@ export default class Clinics extends Component {
       .then((response) => {
         console.log("RESPONSE: ", response);
         console.log("DATA: ", response.data);
-
         window.$("#exampleModal").modal("toggle");
-        alert("Your appointment is Reserved");
+        swal("Created!", "Your appointment is Reserved", "success");
       })
       .catch((err) => {
         console.log("ERR: ", err);
