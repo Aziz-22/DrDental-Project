@@ -165,7 +165,7 @@ ERD(Entity-realtionship diagram)
   <a href="https://i.imgur.com/t5sItca.png"><img src="https://i.imgur.com/0Ttp7Od.png" alt="Dr.Dental"></a>
 </h1>
 
-## WebSite Link 
+## Website Link 
 > https://drdentalclinics.herokuapp.com/
 
 ## Future work
